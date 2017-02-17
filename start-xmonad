@@ -27,8 +27,8 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
-[ -f $HOME/.Xmodmap ] && /usr/bin/xmodmap $HOME/.Xmodmap &
-
+#[ -f $HOME/.Xmodmap ] && /usr/bin/xmodmap $HOME/.Xmodmap &
+#xfce4-power-manager &
 
 # Extra terminal window
 # ---------------------
@@ -47,7 +47,7 @@ guake &
 # connected screens and find out what names you should use to refer to them.
 
 # Activate primary screen
-xrandr --output eDP1 --auto --primary
+xrandr --output LVDS1 --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
@@ -109,7 +109,7 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 
 # Remap caps lock to left control. This is not strictly speaking
 # xmonad related, but it's handy if you're a vim user.
-#setxkbmap -option 'ctrl:nocaps'
+setxkbmap -option 'ctrl:swapcaps'
 
 # Now, finally, start xmonad
 exec xmonad

@@ -36,6 +36,7 @@ fi
 # APPLICATION LAUNCHER
 #
 
+
 # Use synapse as our app launcher. (-s: don't display until requested)
 if [ -z "$(pgrep synapse)" ] ; then
     synapse -s &
