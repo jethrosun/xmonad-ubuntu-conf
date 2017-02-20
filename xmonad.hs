@@ -44,7 +44,7 @@ import Data.Ratio ((%))
 myModMask            = mod4Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
-myBorderWidth        = 0              -- width of border around windows
+myBorderWidth        = 1              -- width of border around windows
 myTerminal           = "gnome-terminal"        -- urxvt/terminator which terminal software to use
 myIMRosterTitle      = "Buddy List"   -- title of roster on IM workspace
                                       -- use "Buddy List" for Pidgin, but
@@ -243,6 +243,7 @@ myKeyBindings =
   look for a couple of things:
     - WM_CLASS(STRING): values in this list of strings can be compared
       to "className" to match windows.
+      To find out the className, run ``$ xprop | grep WM_CLASS && APP_NAME_HERE``_
     - WM_NAME(STRING): this value can be compared to "resource" to match
       windows.
 
@@ -274,6 +275,8 @@ myManagementHooks = [
   , resource =? "stalonetray" --> doIgnore
   , className =? "rdesktop" --> doFloat
   , (className =? "Emacs") --> doF (W.shift "3:Dev")
+  , (className =? "Corebird") --> doF (W.shift "7:Chat")
+  , (className =? "Google-hangout") --> doF (W.shift "7:Chat")
   , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
   , (className =? "Komodo IDE") --> doF (W.shift "5:Mail")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
