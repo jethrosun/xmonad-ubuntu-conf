@@ -108,7 +108,7 @@ startupWorkspace = "1:Term"  -- which workspace do you want to be on after launc
   is make the layouts avoid the status bar area at the top of the screen.
   Without this, they would overlap the bar. You can toggle this behavior
   by hitting "super-b" (bound to ToggleStruts in the keyboard bindings
-  in the next section).
+  in the next section). To change layout, "super-tab-space"
 -}
 
 -- Define group of default layouts used on most screens, in the
