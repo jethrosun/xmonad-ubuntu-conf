@@ -26,11 +26,14 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
-#xfce4-power-manager &
+xss-lock dm-tool lock  &
 
 # Extra terminal window
 # ---------------------
 guake &
+
+# run dropbox in background
+dropbox &
 
 #
 # SCREEN CONFIGURATION

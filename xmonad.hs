@@ -207,7 +207,7 @@ myKeyBindings =
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
-    --, ((myModMask .|. mod1Mask, xK_space), spawn "synapse")
+    , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
 
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
