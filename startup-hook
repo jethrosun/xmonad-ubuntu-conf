@@ -36,6 +36,10 @@ fi
 # APPLICATION LAUNCHER
 #
 
+# keybase
+if [-z "$(pgrep run_keybase)"]; then
+run_keybase &
+fi
 
 # Use synapse as our app launcher. (-s: don't display until requested)
 if [ -z "$(pgrep synapse)" ] ; then

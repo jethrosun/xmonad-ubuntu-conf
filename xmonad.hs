@@ -159,7 +159,8 @@ defaultLayouts = smartBorders(avoidStruts(
 -- identified using the myIMRosterTitle variable, and by default is
 -- configured for Pidgin, so if you're using something else you
 -- will want to modify that variable.
-chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
+--chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
+docLayout = smartBorders(avoidStruts(Full))
 
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
 -- floating panels approach is a bit of a challenge to handle with xmonad;
@@ -172,8 +173,9 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "7:Chat" chatLayout
+  onWorkspace "7:Chat" defaultLayouts  ---chatLayout
   $ onWorkspace "9:Pix" gimpLayout
+	$ onWorkspace "4:Docs" docLayout
   $ defaultLayouts
 
 
@@ -275,10 +277,11 @@ myManagementHooks = [
   , resource =? "stalonetray" --> doIgnore
   , className =? "rdesktop" --> doFloat
   , (className =? "Emacs") --> doF (W.shift "3:Dev")
-  , (className =? "Thunar") --> doF (W.shift "4:Doc")
+  , (className =? "TexMaker") --> doF (W.shift "3:Dev")
+  , (className =? "Zathura") --> doF (W.shift "4:Doc")
   , (className =? "virt-manager") --> doF (W.shift "0:VM")
   , (className =? "Corebird") --> doF (W.shift "7:Chat")
-  , (className =? "Google-hangout") --> doF (W.shift "7:Chat")
+  , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
   , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
   , (className =? "Komodo IDE") --> doF (W.shift "5:Mail")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
@@ -341,7 +344,7 @@ myKeys = myKeyBindings ++
   [
     ((m .|. myModMask, key), screenWorkspace sc
       >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
+      | (key, sc) <- zip [xK_e, xK_w, xK_r] [1,0,2]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
   ]
 

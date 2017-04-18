@@ -22,18 +22,13 @@ xrdb -merge .Xresources
 # transparency support.
 xcompmgr -n &
 
-# Persistant keybindings
+# Here I run some personal little things
 #
 # Crusial here because only this can make it happen
 # -----------------------
 xss-lock dm-tool lock  &
-
-# Extra terminal window
-# ---------------------
-guake &
-
-# run dropbox in background
-dropbox &
+guake & 
+ssh-add ~/.ssh/cloud.pem & 
 
 #
 # SCREEN CONFIGURATION
@@ -52,7 +47,7 @@ xrandr --output LVDS1 --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
-xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --left-of LVDS1
+xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --right-of LVDS1
 
 # If we find that a screen is connected via DVI, activate it and position it
 # to the left of the primary screen.
@@ -88,17 +83,6 @@ nitrogen --restore &
 # - window-strut "none" means windows are allowed to cover the tray. In
 #   other words, trust xmonad to handle this part.
 #
-stalonetray \
-  --icon-gravity E \
-  --geometry 5x1-0+0 \
-  --max-geometry 5x1-0+0 \
-  --background '#000000' \
-  --skip-taskbar \
-  --icon-size 24 \
-  --kludges force_icons_size \
-  --window-strut none \
-&
-
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
 # as Empathy. This prevents prompts you may otherwise get for invalid
