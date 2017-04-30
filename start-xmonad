@@ -33,6 +33,29 @@ ssh-add ~/.ssh/cloud.pem &
 #
 # SCREEN CONFIGURATION
 #
+# We handle our screen configuration using xrandr. You are likely to want to
+# edit this section to match the specific demands of your setup. The below
+# setup is for a Lenovo W520 laptop that sometimes has an external monitor
+# hooked up via either VGA or DVI, positioned to the left of the laptop.
+#
+# Note that you can run xrandr at the command line to get a list of your
+# connected screens and find out what names you should use to refer to them.
+
+## Activate primary screen
+xrandr --output LVDS1 --auto --primary
+
+# If we find that a screen is connected via VGA, activate it and position it
+# to the left of the primary screen.
+xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --left-of LVDS1
+
+# If we find that a screen is connected via DVI, activate it and position it
+# to the left of the primary screen.
+xrandr | grep 'DP1 connected' | ifne xrandr --output DP1 --auto --above LVDS1
+
+# LOAD SCREEN BACKGROUNDS
+# To set your backgrounds, run nitrogren /path/to/images
+nitrogen --restore &
+
 
 #
 # STARTUP ICON TRAY
@@ -68,29 +91,6 @@ stalonetray \
   --kludges force_icons_size \
   --window-strut none \
 &
-
-# We handle our screen configuration using xrandr. You are likely to want to
-# edit this section to match the specific demands of your setup. The below
-# setup is for a Lenovo W520 laptop that sometimes has an external monitor
-# hooked up via either VGA or DVI, positioned to the left of the laptop.
-#
-# Note that you can run xrandr at the command line to get a list of your
-# connected screens and find out what names you should use to refer to them.
-
-# Activate primary screen
-xrandr --output LVDS1 --auto --primary
-
-# LOAD SCREEN BACKGROUNDS
-# To set your backgrounds, run nitrogren /path/to/images
-nitrogen --restore &
-
-# If we find that a screen is connected via VGA, activate it and position it
-# to the left of the primary screen.
-xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --left-of LVDS1
-
-# If we find that a screen is connected via DVI, activate it and position it
-# to the left of the primary screen.
-xrandr | grep 'DP1 connected' | ifne xrandr --output DP1 --auto --above LVDS1
 
 
 
