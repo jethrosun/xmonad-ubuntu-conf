@@ -278,10 +278,12 @@ myManagementHooks = [
   , className =? "rdesktop" --> doFloat
   , (className =? "Emacs") --> doF (W.shift "3:Dev")
   , (className =? "TexMaker") --> doF (W.shift "3:Dev")
-  , (className =? "Zathura") --> doF (W.shift "4:Docs")
-  , (className =? "virt-manager") --> doF (W.shift "0:VM")
+  , (className =? "Meld") --> doF (W.shift "8:Dbg")
+	, (className =? "Zathura") --> doF (W.shift "4:Docs")
+  , (className =? "Virt-manager") --> doF (W.shift "0:VM")
   , (className =? "Skype") --> doF (W.shift "7:Chat")
-  , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+  , (className =? "vlc") --> doF (W.shift "6:Web")
+	, (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
   , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
   , (className =? "Komodo IDE") --> doF (W.shift "5:Mail")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat

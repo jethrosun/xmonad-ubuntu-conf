@@ -26,9 +26,15 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
-xss-lock dm-tool lock  &
 guake & 
 ssh-add ~/.ssh/cloud.pem & 
+
+# NOTE(jethro): 
+# on screen locking, I find the solution to be xss-lock (after trying all other
+# options online). Go to Gnome/Settings/Bright&Lock and turn off screen lock, 
+# now only use xss-lock to control the screen lock.
+# P.S. It worked perfect with Yubico keychain.
+xss-lock dm-tool lock  &
 
 #
 # SCREEN CONFIGURATION
@@ -42,11 +48,12 @@ ssh-add ~/.ssh/cloud.pem &
 # connected screens and find out what names you should use to refer to them.
 
 ## Activate primary screen
+# My primary screen will be the big monitor, o/w my be-trusted thinkpad
+xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --primary
 xrandr --output LVDS1 --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
-xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --left-of LVDS1
 
 # If we find that a screen is connected via DVI, activate it and position it
 # to the left of the primary screen.
