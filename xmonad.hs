@@ -24,6 +24,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Circle
 import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.Reflect
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
@@ -46,7 +47,7 @@ myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
 myTerminal           = "gnome-terminal"        -- urxvt/terminator which terminal software to use
-myIMRosterTitle      = "Buddy List"   -- title of roster on IM workspace
+myIMRosterTitle      = "skype"   -- title of roster on IM workspace
                                       -- use "Buddy List" for Pidgin, but
                                       -- "Contact List" for Empathy
 
@@ -159,8 +160,22 @@ defaultLayouts = smartBorders(avoidStruts(
 -- identified using the myIMRosterTitle variable, and by default is
 -- configured for Pidgin, so if you're using something else you
 -- will want to modify that variable.
+--myIMLayout = withIM (1%7) skype Grid
 --chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
 docLayout = smartBorders(avoidStruts(Full))
+
+--https://wiki.haskell.org/Xmonad/Config_archive/sphynx%27s_xmonad.hs
+imLayout = avoidStruts $
+           IM (1%6) (Or (And (ClassName "Pidgin") (Role "buddy_list"))
+                        (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
+
+-- from https://wiki.haskell.org/Xmonad/Config_archive/Thomas_ten_Cate%27s_xmonad.hs
+--imLayout = avoidStruts $ reflectHoriz $ withIM ratio rosters chatLayout where
+--    chatLayout      = Grid
+--    ratio           = 1%6
+--    rosters         = [skypeRoster, pidginRoster]
+--     pidginRoster    = And (ClassName "Pidgin") (Role "buddy_list")
+--    skypeRoster     = (ClassName "Skype") `And` (Not (Title "Options")) `And` (Not (Role "Chats")) `And` (Not (Role "CallWindowForm"))
 
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
 -- floating panels approach is a bit of a challenge to handle with xmonad;
@@ -173,7 +188,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "7:Chat" defaultLayouts  ---chatLayout
+  onWorkspace "7:Chat" imLayout
   $ onWorkspace "9:Pix" gimpLayout
 	$ onWorkspace "4:Docs" docLayout
   $ defaultLayouts
@@ -280,6 +295,7 @@ myManagementHooks = [
   , (className =? "TexMaker") --> doF (W.shift "3:Dev")
   , (className =? "Meld") --> doF (W.shift "8:Dbg")
 	, (className =? "Zathura") --> doF (W.shift "4:Docs")
+  , (className =? "VirtualBox") --> doF (W.shift "0:VM")
   , (className =? "Virt-manager") --> doF (W.shift "0:VM")
   , (className =? "Skype") --> doF (W.shift "7:Chat")
   , (className =? "vlc") --> doF (W.shift "6:Web")
