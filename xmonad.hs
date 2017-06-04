@@ -139,7 +139,7 @@ defaultLayouts = smartBorders(avoidStruts(
   -- the available space. Remaining windows tile to both the left and
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
-  ||| ThreeColMid 1 (3/100) (3/4)
+  ||| ThreeColMid 1 (4/100) (3/4)
 
   -- Circle layout places the master window in the center of the screen.
   -- Remaining windows appear in a circle around it
@@ -162,7 +162,7 @@ defaultLayouts = smartBorders(avoidStruts(
 -- will want to modify that variable.
 --myIMLayout = withIM (1%7) skype Grid
 --chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
-docLayout = smartBorders(avoidStruts(Full ||| Grid ||| ResizableTall 1 (3/100) (1/2) [] ))
+docLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
 
 --https://wiki.haskell.org/Xmonad/Config_archive/sphynx%27s_xmonad.hs
 imLayout = avoidStruts $ reflectHoriz $
