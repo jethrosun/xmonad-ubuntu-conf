@@ -92,7 +92,7 @@ myUrgentWSRight = "}"
 myWorkspaces =
   [
     "7:Chat",  "8:Dbg", "9:Pix",
-    "4:Docs",  "5:Mail", "6:Web",
+    "4:Docs",  "5:Research", "6:Web",
     "1:Term",  "2:Hub", "3:Dev",
     "0:VM",    "Extr1", "Extr2"
   ]
@@ -139,7 +139,7 @@ defaultLayouts = smartBorders(avoidStruts(
   -- the available space. Remaining windows tile to both the left and
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
-  -- ||| ThreeColMid 1 (3/100) (3/4)
+  ||| ThreeColMid 1 (4/100) (3/4)
 
   -- Circle layout places the master window in the center of the screen.
   -- Remaining windows appear in a circle around it
@@ -162,19 +162,19 @@ defaultLayouts = smartBorders(avoidStruts(
 -- will want to modify that variable.
 --myIMLayout = withIM (1%7) skype Grid
 --chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
-docLayout = smartBorders(avoidStruts(Full))
+docLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
 
 --https://wiki.haskell.org/Xmonad/Config_archive/sphynx%27s_xmonad.hs
-imLayout = avoidStruts $
-           IM (1%6) (Or (And (ClassName "Pidgin") (Role "buddy_list"))
-                        (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
+imLayout = avoidStruts $ reflectHoriz $
+  IM (1%6) (Or (And (ClassName "Pidgin") (Role "buddy_list"))
+  (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
 
 -- from https://wiki.haskell.org/Xmonad/Config_archive/Thomas_ten_Cate%27s_xmonad.hs
 --imLayout = avoidStruts $ reflectHoriz $ withIM ratio rosters chatLayout where
 --    chatLayout      = Grid
 --    ratio           = 1%6
---    rosters         = [skypeRoster, pidginRoster]
---     pidginRoster    = And (ClassName "Pidgin") (Role "buddy_list")
+--    [rosters]       = [skypeRoster, pidginRoster]
+--    pidginRoster    = And (ClassName "Pidgin") (Role "buddy_list")
 --    skypeRoster     = (ClassName "Skype") `And` (Not (Title "Options")) `And` (Not (Role "Chats")) `And` (Not (Role "CallWindowForm"))
 
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
@@ -190,7 +190,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 myLayouts =
   onWorkspace "7:Chat" imLayout
   $ onWorkspace "9:Pix" gimpLayout
-	$ onWorkspace "4:Docs" docLayout
+  $ onWorkspace "4:Docs" docLayout
   $ defaultLayouts
 
 
@@ -225,22 +225,15 @@ myKeyBindings =
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
     , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
-
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
-
-
-
-
     , ((myModMask, xK_u), focusUrgent)
-    , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
-    , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
-    , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
+		, ((myModMask, xK_t), spawn "urxvtc")
+		, ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
+		, ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
     --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
     --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
-
-
 
 {-
   Management hooks. You can use management hooks to enforce certain
@@ -294,14 +287,15 @@ myManagementHooks = [
   , (className =? "Emacs") --> doF (W.shift "3:Dev")
   , (className =? "TexMaker") --> doF (W.shift "3:Dev")
   , (className =? "Meld") --> doF (W.shift "8:Dbg")
-	, (className =? "Zathura") --> doF (W.shift "4:Docs")
+  , (className =? "Zathura") --> doF (W.shift "4:Docs")
   , (className =? "VirtualBox") --> doF (W.shift "0:VM")
   , (className =? "Virt-manager") --> doF (W.shift "0:VM")
   , (className =? "Skype") --> doF (W.shift "7:Chat")
   , (className =? "vlc") --> doF (W.shift "6:Web")
-	, (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+  , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+  , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
   , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
-  , (className =? "Komodo IDE") --> doF (W.shift "5:Mail")
+	, (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
