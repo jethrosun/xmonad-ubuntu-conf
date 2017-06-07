@@ -16,6 +16,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # Load X resources (fixes some font issues)
 xrdb -merge .Xresources
+
 # Start compositing to support transparency. You can omit this
 # if you prefer not to use any transparency, but it is likely to cause
 # ugly black fringing with some programs such as synapse that expect
@@ -28,6 +29,8 @@ xcompmgr -n &
 # -----------------------
 guake & 
 ssh-add ~/.ssh/cloud.pem & 
+($HOME/.dropbox-dist/dropboxd &) &
+
 
 # NOTE(jethro): 
 # on screen locking, I find the solution to be xss-lock (after trying all other
@@ -50,14 +53,14 @@ xss-lock dm-tool lock  &
 ## Activate primary screen
 # My primary screen will be the big monitor, o/w my be-trusted thinkpad
 xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --primary
-xrandr --output LVDS1 --auto --primary
+xrandr --output LVDS-1 --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
 
 # If we find that a screen is connected via DVI, activate it and position it
 # to the left of the primary screen.
-xrandr | grep 'DP1 connected' | ifne xrandr --output DP1 --auto --above LVDS1
+xrandr | grep 'DP1 connected' | ifne xrandr --output DP1 --auto --above LVDS-1
 
 # LOAD SCREEN BACKGROUNDS
 # To set your backgrounds, run nitrogren /path/to/images
