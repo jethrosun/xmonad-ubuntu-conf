@@ -52,15 +52,16 @@ xss-lock dm-tool lock  &
 
 ## Activate primary screen
 # My primary screen will be the big monitor, o/w my be-trusted thinkpad
-xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --primary
 xrandr --output LVDS-1 --auto --primary
+xrandr | grep 'VGA1 connected' | ifne xrandr --output VGA1 --auto --primary
+#xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
 
 # If we find that a screen is connected via DVI, activate it and position it
 # to the left of the primary screen.
-xrandr | grep 'DP1 connected' | ifne xrandr --output DP1 --auto --above LVDS-1
+xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --right LVDS-1
 
 # LOAD SCREEN BACKGROUNDS
 # To set your backgrounds, run nitrogren /path/to/images
@@ -101,8 +102,6 @@ stalonetray \
   --kludges force_icons_size \
   --window-strut none \
 &
-
-
 
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
