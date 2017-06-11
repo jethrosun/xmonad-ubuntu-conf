@@ -30,6 +30,7 @@ xcompmgr -n &
 guake & 
 ssh-add ~/.ssh/cloud.pem & 
 ($HOME/.dropbox-dist/dropboxd &) &
+urxvtd & 
 
 
 # NOTE(jethro): 

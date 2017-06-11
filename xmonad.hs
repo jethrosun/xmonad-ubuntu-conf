@@ -228,6 +228,7 @@ myKeyBindings =
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
+		, ((myModMask, xK_t), spawn "urxvtc")
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
