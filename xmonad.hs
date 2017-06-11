@@ -297,8 +297,9 @@ myManagementHooks = [
   , (className =? "Skype") --> doF (W.shift "7:Chat")
   , (className =? "vlc") --> doF (W.shift "6:Web")
   , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+  , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
   , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
-  , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
+	, (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
