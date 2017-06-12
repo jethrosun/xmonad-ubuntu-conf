@@ -229,16 +229,11 @@ myKeyBindings =
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
 		, ((myModMask, xK_t), spawn "urxvtc")
-    , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
-    , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
-    , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
-		--, (0, 0x1008FF02), spawn "~/code/thinkpad-buttons/bright_up.sh")
-    --, ((0, 0x1008FF59)
+		, ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
+		, ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
     --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
     --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
-
-
 
 {-
   Management hooks. You can use management hooks to enforce certain
