@@ -46,8 +46,8 @@ myModMask            = mod4Mask       -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
-myTerminal           = "gnome-terminal"        -- urxvt/terminator which terminal software to use
-myIMRosterTitle      = "skype"   -- title of roster on IM workspace
+myTerminal           = "urxvtc"       -- gnome-terminal/terminator which terminal software to use
+myIMRosterTitle      = "skype"        -- title of roster on IM workspace
                                       -- use "Buddy List" for Pidgin, but
                                       -- "Contact List" for Empathy
 
@@ -77,17 +77,17 @@ myUrgentWSRight = "}"
 
   I would recommend sticking with relatively brief workspace names
   because they are displayed in the xmobar status bar, where space
-  can get tight. Also, the workspace labels are referred to elsewhere
-  in the configuration file, so when you change a label you will have
+                                                             can get tight. Also, the workspace labels are referred to elsewhere
+                                                          in the configuration file, so when you change a label you will have
   to find places which refer to it and make a change there as well.
 
   This central organizational concept of this configuration is that
   the workspaces correspond to keys on the number pad, and that they
   are organized in a grid which also matches the layout of the number pad.
-  So, I don't recommend changing the number of workspaces unless you are
+    So, I don't recommend changing the number of workspaces unless you are
   prepared to delve into the workspace navigation keybindings section
   as well.
--}
+    -}
 
 myWorkspaces =
   [
@@ -107,7 +107,7 @@ startupWorkspace = "1:Term"  -- which workspace do you want to be on after launc
 
   Note that all layouts are wrapped within "avoidStruts". What this does
   is make the layouts avoid the status bar area at the top of the screen.
-  Without this, they would overlap the bar. You can toggle this behavior
+    Without this, they would overlap the bar. You can toggle this behavior
   by hitting "super-b" (bound to ToggleStruts in the keyboard bindings
   in the next section). To change layout, "super-tab-space"
 -}
@@ -171,7 +171,7 @@ imLayout = avoidStruts $ reflectHoriz $
 
 -- from https://wiki.haskell.org/Xmonad/Config_archive/Thomas_ten_Cate%27s_xmonad.hs
 --imLayout = avoidStruts $ reflectHoriz $ withIM ratio rosters chatLayout where
---    chatLayout      = Grid
+  --    chatLayout      = Grid
 --    ratio           = 1%6
 --    [rosters]       = [skypeRoster, pidginRoster]
 --    pidginRoster    = And (ClassName "Pidgin") (Role "buddy_list")
@@ -208,29 +208,29 @@ myLayouts =
 
   Note that in the example below, the last three entries refer
   to nonstandard keys which do not have names assigned by
-  xmonad. That's because they are the volume and mute keys
+                               xmonad. That's because they are the volume and mute keys
   on my laptop, a Lenovo W520.
 
   If you have special keys on your keyboard which you
   want to bind to specific actions, you can use the "xev"
   command-line tool to determine the code for a specific key.
-  Launch the command, then type the key in question and watch
+    Launch the command, then type the key in question and watch
   the output.
--}
+    -}
 
 myKeyBindings =
   [
     ((myModMask, xK_b), sendMessage ToggleStruts)
-    , ((myModMask, xK_a), sendMessage MirrorShrink)
-    , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask, xK_p), spawn "synapse")
-    , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
+      , ((myModMask, xK_a), sendMessage MirrorShrink)
+      , ((myModMask, xK_z), sendMessage MirrorExpand)
+      , ((myModMask, xK_p), spawn "synapse")
+      , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
-		, ((myModMask, xK_t), spawn "urxvtc")
-		, ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
-		, ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
+  , ((myModMask, xK_t), spawn "urxvtc")
+  , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
+  , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
     --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
     --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
@@ -239,7 +239,7 @@ myKeyBindings =
   Management hooks. You can use management hooks to enforce certain
   behaviors when specific programs or windows are launched. This is
   useful if you want certain windows to not be managed by xmonad,
-  or sent to a specific workspace, or otherwise handled in a special
+            or sent to a specific workspace, or otherwise handled in a special
   way.
 
   Each entry within the list of hooks defines a way to identify a
@@ -253,7 +253,7 @@ myKeyBindings =
   look for a couple of things:
     - WM_CLASS(STRING): values in this list of strings can be compared
       to "className" to match windows.
-      To find out the className, run ``$ xprop | grep WM_CLASS && APP_NAME_HERE``_
+        To find out the className, run ``$ xprop | grep WM_CLASS && APP_NAME_HERE``_
     - WM_NAME(STRING): this value can be compared to "resource" to match
       windows.
 
@@ -266,50 +266,50 @@ myKeyBindings =
 
   Once you've pinpointed the window you want to manipulate, here are
   a few examples of things you might do with that window:
-    - doIgnore: this tells xmonad to completely ignore the window. It will
+                                        - doIgnore: this tells xmonad to completely ignore the window. It will
       not be tiled or floated. Useful for things like launchers and
       trays.
-    - doFloat: this tells xmonad to float the window rather than tiling
+        - doFloat: this tells xmonad to float the window rather than tiling
       it. Handy for things that pop up, take some input, and then go away,
       such as dialogs, calculators, and so on.
-    - doF (W.shift "Workspace"): this tells xmonad that when this program
+        - doF (W.shift "Workspace"): this tells xmonad that when this program
       is launched it should be sent to a specific workspace. Useful
       for keeping specific tasks on specific workspaces. In the example
       below I have specific workspaces for chat, development, and
       editing images.
--}
+        -}
 
 myManagementHooks :: [ManageHook]
 myManagementHooks = [
   resource =? "synapse" --> doIgnore
-  , resource =? "stalonetray" --> doIgnore
-  , className =? "rdesktop" --> doFloat
-  , (className =? "Emacs") --> doF (W.shift "3:Dev")
-  , (className =? "TexMaker") --> doF (W.shift "3:Dev")
-  , (className =? "Meld") --> doF (W.shift "8:Dbg")
-  , (className =? "Zathura") --> doF (W.shift "4:Docs")
-  , (className =? "VirtualBox") --> doF (W.shift "0:VM")
-  , (className =? "Virt-manager") --> doF (W.shift "0:VM")
-  , (className =? "Skype") --> doF (W.shift "7:Chat")
-  , (className =? "vlc") --> doF (W.shift "6:Web")
-  , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
-  , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
-  , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
-	, (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
-  , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-  , (className =? "Empathy") --> doF (W.shift "7:Chat")
-  , (className =? "Pidgin") --> doF (W.shift "7:Chat")
-  , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
-  ]
+    , resource =? "stalonetray" --> doIgnore
+    , className =? "rdesktop" --> doFloat
+    , (className =? "Emacs") --> doF (W.shift "3:Dev")
+    , (className =? "TexMaker") --> doF (W.shift "3:Dev")
+    , (className =? "Meld") --> doF (W.shift "8:Dbg")
+    , (className =? "Zathura") --> doF (W.shift "4:Docs")
+    , (className =? "VirtualBox") --> doF (W.shift "0:VM")
+    , (className =? "Virt-manager") --> doF (W.shift "0:VM")
+    , (className =? "Skype") --> doF (W.shift "7:Chat")
+    , (className =? "vlc") --> doF (W.shift "6:Web")
+    , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+    , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
+    , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
+  , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
+    , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
+    , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
+    , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
+    , (className =? "Empathy") --> doF (W.shift "7:Chat")
+    , (className =? "Pidgin") --> doF (W.shift "7:Chat")
+    , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
+                    ]
 
 
 {-
   Workspace navigation keybindings. This is probably the part of the
   configuration I have spent the most time messing with, but understand
   the least. Be very careful if messing with this section.
--}
+    -}
 
 -- We define two lists of keycodes for use in the rest of the
 -- keyboard configuration. The first is the list of numpad keys,
@@ -323,17 +323,17 @@ myManagementHooks = [
 numPadKeys =
   [
     xK_KP_Home, xK_KP_Up, xK_KP_Page_Up
-    , xK_KP_Left, xK_KP_Begin,xK_KP_Right
-    , xK_KP_End, xK_KP_Down, xK_KP_Page_Down
-    , xK_KP_Insert, xK_KP_Delete, xK_KP_Enter
+      , xK_KP_Left, xK_KP_Begin,xK_KP_Right
+      , xK_KP_End, xK_KP_Down, xK_KP_Page_Down
+      , xK_KP_Insert, xK_KP_Delete, xK_KP_Enter
   ]
 
 numKeys =
   [
     xK_7, xK_8, xK_9
-    , xK_4, xK_5, xK_6
-    , xK_1, xK_2, xK_3
-    , xK_0, xK_minus, xK_equal
+      , xK_4, xK_5, xK_6
+      , xK_1, xK_2, xK_3
+      , xK_0, xK_minus, xK_equal
   ]
 
 -- Here, some magic occurs that I once grokked but has since
@@ -344,56 +344,56 @@ numKeys =
 myKeys = myKeyBindings ++
   [
     ((m .|. myModMask, k), windows $ f i)
-       | (i, k) <- zip myWorkspaces numPadKeys
-       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+      | (i, k) <- zip myWorkspaces numPadKeys
+      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
   ] ++
-  [
+    [
     ((m .|. myModMask, k), windows $ f i)
-       | (i, k) <- zip myWorkspaces numKeys
-       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-  ] ++
-  M.toList (planeKeys myModMask (Lines 4) Finite) ++
-  [
+      | (i, k) <- zip myWorkspaces numKeys
+      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+    ] ++
+      M.toList (planeKeys myModMask (Lines 4) Finite) ++
+        [
     ((m .|. myModMask, key), screenWorkspace sc
       >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
-      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-  ]
+        | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+        ]
 
 
 {-
   Here we actually stitch together all the configuration settings
   and run xmonad. We also spawn an instance of xmobar and pipe
   content into it via the logHook.
--}
+    -}
 
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
   xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
     focusedBorderColor = myFocusedBorderColor
-  , normalBorderColor = myNormalBorderColor
-  , terminal = myTerminal
-  , borderWidth = myBorderWidth
-  , layoutHook = myLayouts
-  , workspaces = myWorkspaces
-  , modMask = myModMask
-  , handleEventHook = fullscreenEventHook
-  , startupHook = do
+    , normalBorderColor = myNormalBorderColor
+    , terminal = myTerminal
+    , borderWidth = myBorderWidth
+    , layoutHook = myLayouts
+    , workspaces = myWorkspaces
+    , modMask = myModMask
+    , handleEventHook = fullscreenEventHook
+    , startupHook = do
       setWMName "LG3D"
       windows $ W.greedyView startupWorkspace
       spawn "~/.xmonad/startup-hook"
-  , manageHook = manageHook defaultConfig
+    , manageHook = manageHook defaultConfig
       <+> composeAll myManagementHooks
       <+> manageDocks
-  , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP {
+    , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP {
       ppOutput = hPutStrLn xmproc
-      , ppTitle = xmobarColor myTitleColor "" . shorten myTitleLength
-      , ppCurrent = xmobarColor myCurrentWSColor ""
+        , ppTitle = xmobarColor myTitleColor "" . shorten myTitleLength
+        , ppCurrent = xmobarColor myCurrentWSColor ""
         . wrap myCurrentWSLeft myCurrentWSRight
-      , ppVisible = xmobarColor myVisibleWSColor ""
+        , ppVisible = xmobarColor myVisibleWSColor ""
         . wrap myVisibleWSLeft myVisibleWSRight
-      , ppUrgent = xmobarColor myUrgentWSColor ""
+        , ppUrgent = xmobarColor myUrgentWSColor ""
         . wrap myUrgentWSLeft myUrgentWSRight
-    }
-  }
+                                                           }
+                                                         }
     `additionalKeys` myKeys

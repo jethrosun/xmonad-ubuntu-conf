@@ -32,6 +32,9 @@ ssh-add ~/.ssh/cloud.pem &
 ($HOME/.dropbox-dist/dropboxd &) &
 urxvtd & 
 
+# TLP
+# https://wiki.archlinux.org/index.php/TLP
+tlp start & 
 
 # NOTE(jethro): 
 # on screen locking, I find the solution to be xss-lock (after trying all other
