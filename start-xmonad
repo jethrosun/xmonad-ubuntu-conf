@@ -27,6 +27,7 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
+taffybar &
 guake & 
 ssh-add ~/.ssh/cloud.pem & 
 ($HOME/.dropbox-dist/dropboxd &) &
@@ -119,3 +120,4 @@ setxkbmap -option 'ctrl:swapcaps'
 
 # Now, finally, start xmonad
 exec xmonad
+

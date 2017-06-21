@@ -33,7 +33,7 @@ echo "now install taffybar"
 sudo apt-get -y install g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg
 sudo apt install -y haskell-platform
 cabal update
-cabal taffybar
+cabal install taffybar
 
 
 echo "Creating xmonad xsession configuration..."

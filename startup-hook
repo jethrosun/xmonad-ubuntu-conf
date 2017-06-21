@@ -11,7 +11,6 @@
 #
 # TRAY ICON SOFTWARE
 #
-
 # Empathy chat client (-h: start hidden, -n: don't connect on launch)
 if [ -z "$(pgrep empathy)" ] ; then
   empathy -h -n &
@@ -75,6 +74,8 @@ fi
 
 # Commented by default as it is assumed many users will not want this.
 #xinput set-button-map 10 1 0 3 4 5 6 7
+
+
 
 # I disabled my touchpad because I hate those things. You can find the id
 # of a device you want to disable using "xinput list"; unfortunately it can

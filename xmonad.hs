@@ -37,6 +37,8 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
 
+import System.Taffybar.Hooks.PagerHints (pagerHints)
+
 {-
   Xmonad configuration variables. These settings control some of the
   simpler parts of xmonad's behavior and are straightforward to tweak.
@@ -368,8 +370,8 @@ myKeys = myKeyBindings ++
     -}
 
 main = do
-  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+  --xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
+  xmonad $ pagerHints $ withUrgencyHook NoUrgencyHook $ defaultConfig {
     focusedBorderColor = myFocusedBorderColor
     , normalBorderColor = myNormalBorderColor
     , terminal = myTerminal
@@ -385,15 +387,5 @@ main = do
     , manageHook = manageHook defaultConfig
       <+> composeAll myManagementHooks
       <+> manageDocks
-    , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP {
-      ppOutput = hPutStrLn xmproc
-        , ppTitle = xmobarColor myTitleColor "" . shorten myTitleLength
-        , ppCurrent = xmobarColor myCurrentWSColor ""
-        . wrap myCurrentWSLeft myCurrentWSRight
-        , ppVisible = xmobarColor myVisibleWSColor ""
-        . wrap myVisibleWSLeft myVisibleWSRight
-        , ppUrgent = xmobarColor myUrgentWSColor ""
-        . wrap myUrgentWSLeft myUrgentWSRight
-                                                           }
                                                          }
     `additionalKeys` myKeys
