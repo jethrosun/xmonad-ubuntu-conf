@@ -30,10 +30,9 @@ sudo apt-get update
 sudo apt-get install synapse
 
 echo "now install taffybar"
-sudo apt-get -y install g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg
 sudo apt install -y haskell-platform
 cabal update
-cabal taffybar
+sudo cabal install taffybar --global
 
 
 echo "Creating xmonad xsession configuration..."
