@@ -18,14 +18,23 @@
 # Author: David Brewer
 
 echo "Installing required packages..."
+
+sudo apt-get update
 sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar \
-	xcompmgr nitrogen stalonetray moreutils consolekit xss-lock ssh-askpass-gnome \
-	thunar terminator remmina guake rxvt-unicode-256color
+  xcompmgr nitrogen stalonetray moreutils consolekit xss-lock ssh-askpass-gnome \
+  thunar terminator remmina guake rxvt-unicode-256color
 
 echo "synapse bleeding edge version"
 sudo add-apt-repository ppa:synapse-core/testing
 sudo apt-get update
 sudo apt-get install synapse
+
+echo "now install taffybar"
+sudo apt-get -y install g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg
+sudo apt install -y haskell-platform
+cabal update
+cabal taffybar
+
 
 echo "Creating xmonad xsession configuration..."
 sudo mv /usr/share/xsessions/xmonad.desktop /usr/share/xsessions/xmonad.desktop.original
