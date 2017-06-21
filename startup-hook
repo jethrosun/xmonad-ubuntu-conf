@@ -14,36 +14,46 @@
 
 # Empathy chat client (-h: start hidden, -n: don't connect on launch)
 if [ -z "$(pgrep empathy)" ] ; then
-    empathy -h -n &
+  empathy -h -n &
 fi
 
 # Remmina remote desktop connection client (-i: start hidden)
 if [ -z "$(pgrep remmina)" ] ; then
-    remmina -i &
+  remmina -i &
 fi
 
 # Network manager, so we don't have to configure wifi at the command line.
 if [ -z "$(pgrep nm-applet)" ] ; then
-    nm-applet --sm-disable &
+  nm-applet --sm-disable &
 fi
 
 # Applet for managing print jobs from the tray.
 if [ -z "$(pgrep system-config-printer-applet)" ] ; then
-    system-config-printer-applet &
+  system-config-printer-applet &
 fi
 
 #
 # APPLICATION LAUNCHER
 #
 
+# chromium
+if [-z "$(pgrep chromium-browser)"]; then
+  chromium-browser &
+fi
+
+# slack
+if [-z "$(pgrep scudcloud)"]; then
+  scudcloud &
+fi
+
 # keybase
 if [-z "$(pgrep run_keybase)"]; then
-run_keybase &
+  run_keybase &
 fi
 
 # Use synapse as our app launcher. (-s: don't display until requested)
 if [ -z "$(pgrep synapse)" ] ; then
-    synapse -s &
+  synapse -s &
 fi
 # On login, we unlock the ssh keychain so we're not prompted for
 # passphrases later. We pipe /dev/null to ssh-add to make it realize
@@ -64,12 +74,12 @@ fi
 # the remapping.
 
 # Commented by default as it is assumed many users will not want this.
-# xinput set-button-map 10 1 0 3 4 5 6 7
+#xinput set-button-map 10 1 0 3 4 5 6 7
 
 # I disabled my touchpad because I hate those things. You can find the id
 # of a device you want to disable using "xinput list"; unfortunately it can
 # change depending on what devices you have plugged into USB. We extract the
 # id of the device from the output of xinput, then use it to disable the
 # device
-TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
+OUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
 xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
