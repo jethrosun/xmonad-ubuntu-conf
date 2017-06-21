@@ -27,11 +27,11 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
-taffybar &
 guake & 
 ssh-add ~/.ssh/cloud.pem & 
 ($HOME/.dropbox-dist/dropboxd &) &
 urxvtd & 
+taffybar &
 
 # TLP
 # https://wiki.archlinux.org/index.php/TLP
@@ -71,7 +71,6 @@ xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --right LVDS-1
 # LOAD SCREEN BACKGROUNDS
 # To set your backgrounds, run nitrogren /path/to/images
 nitrogen --restore &
-
 
 #
 # STARTUP ICON TRAY
@@ -120,4 +119,3 @@ setxkbmap -option 'ctrl:swapcaps'
 
 # Now, finally, start xmonad
 exec xmonad
-

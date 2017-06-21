@@ -29,6 +29,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
 import XMonad.Actions.Plane
+import           XMonad.Hooks.EwmhDesktops        (ewmh)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ICCCMFocus
@@ -371,7 +372,7 @@ myKeys = myKeyBindings ++
 
 main = do
   --xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
-  xmonad $ pagerHints $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+  xmonad $ ewmh $ pagerHints $ withUrgencyHook NoUrgencyHook $ defaultConfig {
     focusedBorderColor = myFocusedBorderColor
     , normalBorderColor = myNormalBorderColor
     , terminal = myTerminal
