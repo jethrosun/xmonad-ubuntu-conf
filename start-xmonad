@@ -28,7 +28,11 @@ xcompmgr -n &
 # Crusial here because only this can make it happen
 # -----------------------
 guake & 
+
+ssh-add ~/.ssh/jsun7 & 
 ssh-add ~/.ssh/cloud.pem & 
+ssh-add ~/.ssh/id_rsa & 
+
 ($HOME/.dropbox-dist/dropboxd &) &
 urxvtd & 
 taffybar &
