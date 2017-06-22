@@ -28,7 +28,7 @@ main = do
             { widgetSep = " :: "
             , activeWorkspace = colorize "#ffaa00" "" . escape
             , visibleWorkspace = colorize "#aa5500" "" . escape
-            , emptyWorkspace = colorize "#444444" "" . escape
+            --, emptyWorkspace = colorize "#444444" "" . escape
             }
         tray = systrayNew
         sep = textWidgetNew " ::"
@@ -44,8 +44,5 @@ main = do
         cpu = pollingGraphNew cpuCfg 1 cpuCallback
     defaultTaffybar defaultTaffybarConfig
                         { startWidgets = [ pager ]
-                        , endWidgets = [ tray, cpu, sep, clock ]
-                        , barHeight = 20
-                        , monitorNumber = 1
-                        , widgetSpacing = 0
+                        , endWidgets = [ cpu, sep, clock, tray ]
                         }
