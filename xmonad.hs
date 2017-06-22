@@ -388,5 +388,5 @@ main = do
     , manageHook = manageHook defaultConfig
       <+> composeAll myManagementHooks
       <+> manageDocks
-                                                         }
+  }
     `additionalKeys` myKeys
