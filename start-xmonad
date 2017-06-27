@@ -28,10 +28,13 @@ xcompmgr -n &
 # Crusial here because only this can make it happen
 # -----------------------
 guake & 
+
 ssh-add ~/.ssh/cloud.pem & 
+ssh-add ~/.ssh/jsun7 & 
+ssh-add ~/.ssh/id_rsa &
+
 ($HOME/.dropbox-dist/dropboxd &) &
 urxvtd & 
-taffybar &
 
 # TLP
 # https://wiki.archlinux.org/index.php/TLP
@@ -96,16 +99,19 @@ nitrogen --restore &
 # - window-strut "none" means windows are allowed to cover the tray. In
 #   other words, trust xmonad to handle this part.
 #
-stalonetray \
-  --icon-gravity E \
-  --geometry 5x1-0+0 \
-  --max-geometry 5x1-0+0 \
-  --background '#000000' \
-  --skip-taskbar \
-  --icon-size 24 \
-  --kludges force_icons_size \
-  --window-strut none \
-&
+#stalonetray \
+#  --icon-gravity E \
+#  --geometry 5x1-0+0 \
+#  --max-geometry 5x1-0+0 \
+#  --background '#000000' \
+#  --skip-taskbar \
+#  --icon-size 24 \
+#  --kludges force_icons_size \
+#  --window-strut none \
+#&
+
+# better start taffybar after the tray
+taffybar &
 
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
@@ -116,6 +122,9 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 # Remap caps lock to left control. This is not strictly speaking
 # xmonad related, but it's handy if you're a vim user.
 setxkbmap -option 'ctrl:swapcaps'
+
+
+chromium-browser & 
 
 # Now, finally, start xmonad
 exec xmonad

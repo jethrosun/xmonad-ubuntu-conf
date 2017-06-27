@@ -94,8 +94,8 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
-    "4:Docs",  "5:Research", "6:Web",
+    "7:Chat",  "8:Dbg", "9:Web",
+    "4:Docs",  "5:Research", "6:Pix",
     "1:Term",  "2:Hub", "3:Dev",
     "0:VM",    "Extr1", "Extr2"
   ]
@@ -192,7 +192,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- layouts.
 myLayouts =
   onWorkspace "7:Chat" imLayout
-  $ onWorkspace "9:Pix" gimpLayout
+  $ onWorkspace "6:Pix" gimpLayout
   $ onWorkspace "4:Docs" docLayout
   $ defaultLayouts
 
@@ -224,16 +224,20 @@ myLayouts =
 myKeyBindings =
   [
     ((myModMask, xK_b), sendMessage ToggleStruts)
-      , ((myModMask, xK_a), sendMessage MirrorShrink)
-      , ((myModMask, xK_z), sendMessage MirrorExpand)
-      , ((myModMask, xK_p), spawn "synapse")
-      , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
+    , ((myModMask, xK_a), sendMessage MirrorShrink)
+    , ((myModMask, xK_z), sendMessage MirrorExpand)
+    , ((myModMask, xK_o), spawn "emacs")
+    , ((myModMask, xK_e), spawn "emacs")
+    , ((myModMask, xK_p), spawn "synapse")
+    , ((myModMask, xK_c), spawn "chromium-browse")
+    , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
+    , ((myModMask, xK_t), spawn "thunar")
+    , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
---    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
+--    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
-  , ((myModMask, xK_t), spawn "urxvtc")
-  , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
-  , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
+    , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+    , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
     --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
     --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
@@ -289,22 +293,32 @@ myManagementHooks = [
     , className =? "rdesktop" --> doFloat
     , (className =? "Emacs") --> doF (W.shift "3:Dev")
     , (className =? "TexMaker") --> doF (W.shift "3:Dev")
-    , (className =? "Meld") --> doF (W.shift "8:Dbg")
+
+
     , (className =? "Zathura") --> doF (W.shift "4:Docs")
+    , (className =? "Evince") --> doF (W.shift "4:Docs")
+
+    , (className =? "Meld") --> doF (W.shift "8:Dbg")
+
     , (className =? "VirtualBox") --> doF (W.shift "0:VM")
     , (className =? "Virt-manager") --> doF (W.shift "0:VM")
     , (className =? "Skype") --> doF (W.shift "7:Chat")
-    , (className =? "vlc") --> doF (W.shift "6:Web")
+    , (className =? "vlc") --> doF (W.shift "9:Web")
     , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
     , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
-    , (className =? "Google-chrome") --> doF (W.shift "2:Hub")
-  , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
+    , (className =? "Google-chrome") --> doF (W.shift "9:Web")
+
+    , (className =? "Terminator") --> doF (W.shift "5:Research")
+    , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
+
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
     , (className =? "Empathy") --> doF (W.shift "7:Chat")
     , (className =? "Pidgin") --> doF (W.shift "7:Chat")
-    , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
+
+    , (className =? "XMind") --> doF (W.shift "6:Pix")
+    , (className =? "Gimp-2.8") --> doF (W.shift "6:Pix")
                     ]
 
 
@@ -363,6 +377,26 @@ myKeys = myKeyBindings ++
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
         ]
 
+myThinkpadKeys :: [(String, X())]
+myThinkpadKeys = [  
+         ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+        --, ("M-<XF86AudioLowerVolume>", spawn "amixer set Master 3dB-")
+        , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+        --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
+        , ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Speaker unmute")
+        -- FIXME:
+        , ("<XF86MonBrightnessUp>"  , spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")  
+        , ("<XF86MonBrightnessDown>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")
+        , ("M-\\", toggleTouchpad)
+ ]
+
+toggleTouchpad =
+  let
+    touchpad = "'SynPS/2 Synaptics TouchPad'"
+    newStatus = "$(xinput --list " ++ touchpad ++ " | grep -c disabled)"
+  in
+    spawn $ "xinput --set-prop " ++ touchpad ++ " 'Device Enabled' " ++ newStatus
+
 
 {-
   Here we actually stitch together all the configuration settings
@@ -390,3 +424,5 @@ main = do
       <+> manageDocks
   }
     `additionalKeys` myKeys
+    `additionalKeysP` myThinkpadKeys
+

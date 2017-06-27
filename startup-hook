@@ -54,6 +54,14 @@ fi
 if [ -z "$(pgrep synapse)" ] ; then
   synapse -s &
 fi
+
+# start flux
+$HOME/.xmonad/start-flux
+
+# get the time zone rolling!
+~/.local/bin/tzupdate
+
+
 # On login, we unlock the ssh keychain so we're not prompted for
 # passphrases later. We pipe /dev/null to ssh-add to make it realize
 # it's not running in a terminal. Otherwise, it won't launch the prompt.
@@ -81,5 +89,5 @@ fi
 # change depending on what devices you have plugged into USB. We extract the
 # id of the device from the output of xinput, then use it to disable the
 # device
-OUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
+TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
 xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
