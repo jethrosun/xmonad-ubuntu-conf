@@ -5,8 +5,12 @@ import System.Taffybar.TaffyPager
 import System.Taffybar.Pager
 import System.Taffybar.Battery
 import System.Taffybar.SimpleClock
+import System.Taffybar.NetMonitor
+
 import System.Taffybar.Widgets.PollingGraph
+
 import System.Taffybar.FreedesktopNotifications
+
 import Graphics.UI.Gtk
 
 import System.Information.CPU
@@ -45,7 +49,9 @@ main = do
         cpu = pollingGraphNew cpuCfg 1 cpuCallback
         battery = batteryBarNew defaultBatteryConfig 10
         batteryTime = textBatteryNew "| $time$" 10
+        --net = netMonitorNewWith 1k.5 "wlp3s0" 2 (formatNetworkInfo defaultNetFormat)
+        net = netMonitorNew 2 "wlp3s0"
     defaultTaffybar defaultTaffybarConfig
                         { startWidgets = [ pager ]
-                        , endWidgets = [ clock, sep, battery, batteryTime, cpu, sep, tray ]
+                        , endWidgets = [ battery, batteryTime, cpu, sep, clock, tray]
                         }
