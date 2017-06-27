@@ -49,3 +49,5 @@ main = do
                         { startWidgets = [ pager ]
                         , endWidgets = [ clock, sep, battery, batteryTime, cpu, sep, tray ]
                         }
+
+-- end of [taffybar.hs]
