@@ -3,6 +3,7 @@ import System.Taffybar
 import System.Taffybar.Systray
 import System.Taffybar.TaffyPager
 import System.Taffybar.Pager
+import System.Taffybar.Battery
 import System.Taffybar.SimpleClock
 import System.Taffybar.Widgets.PollingGraph
 import System.Taffybar.FreedesktopNotifications
@@ -42,7 +43,9 @@ main = do
           , graphLabel = Nothing
         }
         cpu = pollingGraphNew cpuCfg 1 cpuCallback
+        battery = batteryBarNew defaultBatteryConfig 10
+        batteryTime = textBatteryNew "| $time$" 10
     defaultTaffybar defaultTaffybarConfig
                         { startWidgets = [ pager ]
-                        , endWidgets = [ cpu, sep, clock, tray ]
+                        , endWidgets = [ clock, sep, battery, batteryTime, cpu, sep, tray ]
                         }
