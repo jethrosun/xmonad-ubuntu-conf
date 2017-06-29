@@ -53,5 +53,5 @@ main = do
         net = netMonitorNew 2 "wlp3s0"
     defaultTaffybar defaultTaffybarConfig
                         { startWidgets = [ pager ]
-                        , endWidgets = [ battery, batteryTime, cpu, sep, clock, tray]
+                        , endWidgets = [ battery, batteryTime, cpu, clock, tray]
                         }
