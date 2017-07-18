@@ -29,9 +29,11 @@ xcompmgr -n &
 # -----------------------
 guake & 
 
+
 ssh-add ~/.ssh/cloud.pem & 
 ssh-add ~/.ssh/jsun7 & 
 ssh-add ~/.ssh/id_rsa &
+
 
 ($HOME/.dropbox-dist/dropboxd &) &
 urxvtd & 

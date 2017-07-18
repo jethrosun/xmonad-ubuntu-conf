@@ -55,3 +55,4 @@ main = do
                         { startWidgets = [ pager ]
                         , endWidgets = [ battery, batteryTime, cpu, clock, tray]
                         }
+
