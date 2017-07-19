@@ -224,16 +224,18 @@ myLayouts =
 myKeyBindings =
   [
     ((myModMask, xK_b), sendMessage ToggleStruts)
-      , ((myModMask, xK_a), sendMessage MirrorShrink)
-      , ((myModMask, xK_z), sendMessage MirrorExpand)
-      , ((myModMask, xK_p), spawn "synapse")
-      , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
+    , ((myModMask, xK_a), sendMessage MirrorShrink)
+    , ((myModMask, xK_z), sendMessage MirrorExpand)
+    , ((myModMask, xK_o), spawn "emacs")
+    , ((myModMask, xK_e), spawn "emacs")
+    , ((myModMask, xK_p), spawn "synapse")
+    , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)     --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
-  , ((myModMask, xK_t), spawn "urxvtc")
-  , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
-  , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
+    , ((myModMask, xK_t), spawn "urxvtc")
+    , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")                                            --Raise volume
+    , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
     --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
     --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
