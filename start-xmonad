@@ -123,7 +123,8 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 # xmonad related, but it's handy if you're a vim user.
 setxkbmap -option 'ctrl:swapcaps'
 
-
+slack &
+nocturn & 
 chromium-browser & 
 
 # Now, finally, start xmonad

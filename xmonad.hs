@@ -94,9 +94,9 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "1:Term",  "2:Hub", "3:Dev",
     "7:Dbg",  "8:Chat", "9:Web",
     "4:Docs",  "5:Research", "6:Pix",
+    "1:Term",  "2:Hub", "3:Dev",
     "0:VM",    "Extr1", "Extr2"
   ]
 
@@ -143,6 +143,7 @@ defaultLayouts = smartBorders(avoidStruts(
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
   ||| ThreeColMid 1 (4/100) (3/4)
+  -- BROKEN?
 
   -- Circle layout places the master window in the center of the screen.
   -- Remaining windows appear in a circle around it
@@ -157,20 +158,34 @@ defaultLayouts = smartBorders(avoidStruts(
 -- Here we define some layouts which will be assigned to specific
 -- workspaces based on the functionality of that workspace.
 
+docLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
+
+-- Trying different imLayout ..
+--imLayout = smartBorders(avoidStruts(ThreeColMid ||| Full))
+imLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (2/3)))
+
 -- The chat layout uses the "IM" layout. We have a roster which takes
 -- up 1/8 of the screen vertically, and the remaining space contains
 -- chat windows which are tiled using the grid layout. The roster is
 -- identified using the myIMRosterTitle variable, and by default is
 -- configured for Pidgin, so if you're using something else you
 -- will want to modify that variable.
---myIMLayout = withIM (1%7) skype Grid
+--myIMLayout = withIM (1%7) Corebird Grid
 --chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
-docLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
+
+
+-- numMasters, resizeIncr, splitRatio
+--tall = Tall 1           0.02        0.5
+-- define the list of standardLayouts
+--standardLayouts = tall ||| Mirror tall ||| Full
+--imLayout = withIM (1/10) (Role "roster") standardLayouts
+
 
 --https://wiki.haskell.org/Xmonad/Config_archive/sphynx%27s_xmonad.hs
-imLayout = avoidStruts $ reflectHoriz $
-  IM (1%6) (Or (And (ClassName "Pidgin") (Role "buddy_list"))
-  (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
+--imLayout = avoidStruts $ reflectHoriz $
+--  IM (1%6) (Or (And (ClassName "Nocturn") (Role ""))
+--  (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
+
 
 -- from https://wiki.haskell.org/Xmonad/Config_archive/Thomas_ten_Cate%27s_xmonad.hs
 --imLayout = avoidStruts $ reflectHoriz $ withIM ratio rosters chatLayout where
@@ -287,8 +302,8 @@ myKeyBindings =
         -}
 
 myManagementHooks :: [ManageHook]
-myManagementHooks = [
-  resource =? "synapse" --> doIgnore
+myManagementHooks = 
+    [ resource =? "synapse" --> doIgnore
     , resource =? "stalonetray" --> doIgnore
     , className =? "rdesktop" --> doFloat
     , (className =? "Emacs") --> doF (W.shift "3:Dev")
@@ -298,14 +313,24 @@ myManagementHooks = [
     , (className =? "Zathura") --> doF (W.shift "4:Docs")
     , (className =? "Evince") --> doF (W.shift "4:Docs")
 
-    , (className =? "Meld") --> doF (W.shift "8:Dbg")
+    , (className =? "Meld") --> doF (W.shift "7:Dbg")
 
     , (className =? "VirtualBox") --> doF (W.shift "0:VM")
     , (className =? "Virt-manager") --> doF (W.shift "0:VM")
-    , (className =? "Skype") --> doF (W.shift "8:Chat")
+
     , (className =? "vlc") --> doF (W.shift "9:Web")
-    , (className =? "ScudCloud Slack") --> doF (W.shift "8:Chat")
+
+    , (className =? "skypeforlinux") --> doF (W.shift "8:Chat")
+    , (className =? "Nocturn") --> doF (W.shift "8:Chat")
     , (className =? "Slack") --> doF (W.shift "8:Chat")
+    , (className =? "Corebird") --> doF (W.shift "8:Chat")
+    , (className =? "Empathy") --> doF (W.shift "8:Chat")
+    , (className =? "Pidgin") --> doF (W.shift "8:Chat")
+    , (className =? "ScudCloud Slack") --> doF (W.shift "8:Chat")
+
+    -- and float everything but the roster
+    --, classNotRole ("Nocturn", "roster") --> doFloat
+
     , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
     , (className =? "Google-chrome") --> doF (W.shift "9:Web")
 
@@ -315,12 +340,13 @@ myManagementHooks = [
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-    , (className =? "Empathy") --> doF (W.shift "8:Chat")
-    , (className =? "Pidgin") --> doF (W.shift "8:Chat")
-
-    , (className =? "XMind") --> doF (W.shift "6:Pix")
+        , (className =? "XMind") --> doF (W.shift "6:Pix")
     , (className =? "Gimp-2.8") --> doF (W.shift "6:Pix")
-                    ]
+    ]
+    where
+        classNotRole :: (String, String) -> Query Bool
+        classNotRole (c,r) = className =? c <&&> role /=? r
+        role = stringProperty "WM_WINDOW_ROLE"
 
 
 {-
