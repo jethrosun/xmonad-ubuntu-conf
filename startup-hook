@@ -91,3 +91,7 @@ $HOME/.xmonad/start-flux
 # device
 TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
 xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
+
+TKP_EXTRA_ID=`xinput | grep 'ThinkPad Extra Buttons' | cut -f 2 | cut -f 2 -d =`
+xinput set-prop $TKP_EXTRA_ID "Device Enabled" 1
+

@@ -94,9 +94,9 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Web",
-    "4:Docs",  "5:Research", "6:Pix",
     "1:Term",  "2:Hub", "3:Dev",
+    "7:Dbg",  "8:Chat", "9:Web",
+    "4:Docs",  "5:Research", "6:Pix",
     "0:VM",    "Extr1", "Extr2"
   ]
 
@@ -191,7 +191,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "7:Chat" imLayout
+  onWorkspace "8:Chat" imLayout
   $ onWorkspace "6:Pix" gimpLayout
   $ onWorkspace "4:Docs" docLayout
   $ defaultLayouts
@@ -302,9 +302,10 @@ myManagementHooks = [
 
     , (className =? "VirtualBox") --> doF (W.shift "0:VM")
     , (className =? "Virt-manager") --> doF (W.shift "0:VM")
-    , (className =? "Skype") --> doF (W.shift "7:Chat")
+    , (className =? "Skype") --> doF (W.shift "8:Chat")
     , (className =? "vlc") --> doF (W.shift "9:Web")
-    , (className =? "ScudCloud Slack") --> doF (W.shift "7:Chat")
+    , (className =? "ScudCloud Slack") --> doF (W.shift "8:Chat")
+    , (className =? "Slack") --> doF (W.shift "8:Chat")
     , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
     , (className =? "Google-chrome") --> doF (W.shift "9:Web")
 
@@ -314,8 +315,8 @@ myManagementHooks = [
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-    , (className =? "Empathy") --> doF (W.shift "7:Chat")
-    , (className =? "Pidgin") --> doF (W.shift "7:Chat")
+    , (className =? "Empathy") --> doF (W.shift "8:Chat")
+    , (className =? "Pidgin") --> doF (W.shift "8:Chat")
 
     , (className =? "XMind") --> doF (W.shift "6:Pix")
     , (className =? "Gimp-2.8") --> doF (W.shift "6:Pix")
@@ -379,7 +380,7 @@ myKeys = myKeyBindings ++
 
 myThinkpadKeys :: [(String, X())]
 myThinkpadKeys = [  
-         ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+         ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
         --, ("M-<XF86AudioLowerVolume>", spawn "amixer set Master 3dB-")
         , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
         --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
