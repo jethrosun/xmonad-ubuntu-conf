@@ -59,7 +59,7 @@ fi
 $HOME/.xmonad/start-flux
 
 # get the time zone rolling!
-~/.local/bin/tzupdate
+#~/.local/bin/tzupdate
 
 
 # On login, we unlock the ssh keychain so we're not prompted for
@@ -90,8 +90,7 @@ $HOME/.xmonad/start-flux
 # id of the device from the output of xinput, then use it to disable the
 # device
 TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
-xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
-
 TKP_EXTRA_ID=`xinput | grep 'ThinkPad Extra Buttons' | cut -f 2 | cut -f 2 -d =`
-xinput set-prop $TKP_EXTRA_ID "Device Enabled" 1
+xinput set-prop $TOUCHPAD_ID "Device Enabled"  0  &
+xinput set-prop $TKP_EXTRA_ID "Device Enabled" 1  &
 
