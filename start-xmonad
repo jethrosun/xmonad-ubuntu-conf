@@ -40,6 +40,9 @@ urxvtd &
 # https://wiki.archlinux.org/index.php/TLP
 tlp start & 
 
+# Kill bluetooth
+rfkill block bluetooth
+
 # NOTE(jethro): 
 # on screen locking, I find the solution to be xss-lock (after trying all other
 # options online). Go to Gnome/Settings/Bright&Lock and turn off screen lock, 

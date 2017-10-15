@@ -308,6 +308,8 @@ myManagementHooks =
     , className =? "rdesktop" --> doFloat
     , (className =? "Emacs") --> doF (W.shift "3:Dev")
     , (className =? "TexMaker") --> doF (W.shift "3:Dev")
+    , (className =? "jetbrains-pycharm") --> doF (W.shift "3:Dev")
+    , (className =? "jetbrains-idea") --> doF (W.shift "3:Dev")
 
 
     , (className =? "Zathura") --> doF (W.shift "4:Docs")
