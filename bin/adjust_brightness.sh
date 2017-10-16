@@ -8,7 +8,8 @@
 #   jethros ALL = (root) NOPASSWD: /home/jethros/.xmonad/bin/adjust_brightness.sh
 # 2. reboot
 
-# FIXME: this script will create a max_brightness file in ~/
+# FIXED: this script will create a max_brightness file in ~/
+cd $(dirname $0)
 
 cur_brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
 max_brightness=$(cat /sys/class/backlight/intel_backlight/max_brightness)
