@@ -8,9 +8,15 @@
 # Author: David Brewer
 # Repository: https://github.com/davidbrewer/xmonad-ubuntu-conf
 
+# Use synapse as our app launcher. (-s: don't display until requested)
+if [ -z "$(pgrep synapse)" ] ; then
+  synapse -s &
+fi
+
 #
 # TRAY ICON SOFTWARE
 #
+
 # Empathy chat client (-h: start hidden, -n: don't connect on launch)
 if [ -z "$(pgrep empathy)" ] ; then
   empathy -h -n &
@@ -51,11 +57,6 @@ fi
 # keybase
 if [-z "$(pgrep run_keybase)"]; then
   run_keybase &
-fi
-
-# Use synapse as our app launcher. (-s: don't display until requested)
-if [ -z "$(pgrep synapse)" ] ; then
-  synapse -s &
 fi
 
 # start flux
