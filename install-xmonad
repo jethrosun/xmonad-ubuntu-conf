@@ -31,6 +31,7 @@ echo "Creating xmonad xsession configuration..."
 sudo mv /usr/share/xsessions/xmonad.desktop /usr/share/xsessions/xmonad.desktop.original
 sudo cp ~/.xmonad/xmonad.desktop /usr/share/xsessions
 sudo chmod a+r /usr/share/xsessions/xmonad.desktop
+sudo cp ~/.xmonad/xmonad.session /usr/share/gnome-session/sessions/xmonad.session
 sudo cp ~/.xmonad/images/custom_xmonad_badge.png /usr/share/unity-greeter
 sudo chmod a+r /usr/share/unity-greeter/custom_xmonad_badge.png
 
