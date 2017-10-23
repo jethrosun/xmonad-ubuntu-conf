@@ -27,6 +27,7 @@ sudo apt-get install -y xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmoba
 echo "synapse bleeding edge version"
 sudo add-apt-repository ppa:synapse-core/testing
 sudo apt-get update
+#sudo sed 's/artful/yakkety/g' /etc/apt/sources.list.d/synapse-core-ubuntu-testing-artful.list
 sudo apt-get install -y synapse
 
 echo "thinkpad battery saver"

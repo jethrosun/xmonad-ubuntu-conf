@@ -129,6 +129,8 @@ setxkbmap -option 'ctrl:swapcaps'
 slack &
 nocturn & 
 chromium-browser & 
+xsetroot -cursor_name left_ptr & 
+
 
 # Now, finally, start xmonad
 exec xmonad
