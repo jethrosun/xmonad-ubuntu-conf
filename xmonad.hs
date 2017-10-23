@@ -247,7 +247,7 @@ myKeyBindings =
     , ((myModMask, xK_c), spawn "chromium-browse")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
     , ((myModMask, xK_t), spawn "thunar")
-    , ((myModMask .|. shiftMask, xK_l), spawn "dm-tool lock")
+    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")
 --    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
 --    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
