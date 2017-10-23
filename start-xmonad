@@ -48,7 +48,7 @@ rfkill block bluetooth
 # options online). Go to Gnome/Settings/Bright&Lock and turn off screen lock, 
 # now only use xss-lock to control the screen lock.
 # P.S. It worked perfect with Yubico keychain.
-xss-lock gnome-screensaver-command --lock  &
+xss-lock "gnome-screensaver-command --lock" &
 
 #
 # SCREEN CONFIGURATION
