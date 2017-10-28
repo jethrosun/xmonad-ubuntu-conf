@@ -209,6 +209,7 @@ myLayouts =
   onWorkspace "8:Chat" imLayout
   $ onWorkspace "6:Pix" gimpLayout
   $ onWorkspace "4:Docs" docLayout
+  $ onWorkspace "2:Hub" imLayout
   $ defaultLayouts
 
 
@@ -311,8 +312,8 @@ myManagementHooks =
     , (className =? "jetbrains-pycharm") --> doF (W.shift "3:Dev")
     , (className =? "jetbrains-idea") --> doF (W.shift "3:Dev")
 
-
     , (className =? "Zathura") --> doF (W.shift "4:Docs")
+    , (className =? "Master PDF Editor") --> doF (W.shift "4:Docs")
     , (className =? "Evince") --> doF (W.shift "4:Docs")
 
     , (className =? "Meld") --> doF (W.shift "7:Dbg")
