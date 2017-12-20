@@ -201,7 +201,8 @@ imLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (2/3)))
 -- master area, and then use this ThreeColMid layout to make the panels
 -- tile to the left and right of the image. If you use GIMP 2.8, you
 -- can use single-window mode and avoid this issue.
-gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
+gimpLayout = smartBorders(avoidStruts(ThreeColMid 2 (3/100) (3/4)))
+--gimpLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
 
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
