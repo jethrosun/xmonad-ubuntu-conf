@@ -322,6 +322,7 @@ myManagementHooks =
     , (className =? "VirtualBox") --> doF (W.shift "0:VM")
     , (className =? "Virt-manager") --> doF (W.shift "0:VM")
 
+    , (className =? "Firefox") --> doF (W.shift "9:Web")
     , (className =? "vlc") --> doF (W.shift "9:Web")
 
     , (className =? "skypeforlinux") --> doF (W.shift "8:Chat")
