@@ -65,9 +65,10 @@ xss-lock -- gnome-screensaver-command --lock &
 ## Activate primary screen
 
 # My primary screen will be the big monitor, o/w my be-trusted thinkpad
-xrandr --output eDP-1 --auto --primary   # by default
-xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --primary
-xrandr | grep 'DP-2 connected' | ifne xrandr --output eDP-1 --auto --left-of DP-2
+xrandr --output eDP-1 --auto --primary
+
+#xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --primary
+#xrandr | grep 'DP-2 connected' | ifne xrandr --output eDP-1 --auto --left-of DP-2
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
@@ -75,7 +76,8 @@ xrandr | grep 'DP-2 connected' | ifne xrandr --output eDP-1 --auto --left-of DP-
 
 # If we find that a screen is connected via DVI, activate it and position it
 # to the left of the primary screen.
-#xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --right eDP-1
+#xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --right-of eDP-1
+#xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of eDP-1
 
 # LOAD SCREEN BACKGROUNDS
 # To set your backgrounds, run nitrogren /path/to/images
