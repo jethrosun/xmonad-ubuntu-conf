@@ -1,0 +1,1 @@
+/home/jethros/git/udev-monitor-hotplug/usr/local/bin/monitor-hotplug.sh
