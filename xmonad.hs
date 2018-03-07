@@ -308,8 +308,9 @@ myManagementHooks =
     [ resource =? "synapse" --> doIgnore
     , resource =? "stalonetray" --> doIgnore
     , className =? "rdesktop" --> doFloat
-    , (className =? "Emacs") --> doF (W.shift "3:Dev")
     , (className =? "TexMaker") --> doF (W.shift "3:Dev")
+    , (className =? "Code") --> doF (W.shift "3:Dev")
+    , (className =? "Emacs") --> doF (W.shift "3:Dev")
     , (className =? "jetbrains-pycharm") --> doF (W.shift "3:Dev")
     , (className =? "jetbrains-idea") --> doF (W.shift "3:Dev")
 
