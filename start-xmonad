@@ -134,7 +134,8 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 # xmonad related, but it's handy if you're a vim user.
 setxkbmap -option 'ctrl:swapcaps'
 
-slack &
+## Slack no more!
+#slack & 
 nocturn & 
 chromium-browser & 
 xsetroot -cursor_name left_ptr & 

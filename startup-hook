@@ -49,10 +49,11 @@ if [-z "$(pgrep chromium-browser)"]; then
   chromium-browser &
 fi
 
+## deprecated because there is official slack now
 # slack
-if [-z "$(pgrep scudcloud)"]; then
-  scudcloud &
-fi
+#if [-z "$(pgrep scudcloud)"]; then
+#  scudcloud &
+#fi
 
 # keybase
 if [-z "$(pgrep run_keybase)"]; then
