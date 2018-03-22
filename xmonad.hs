@@ -343,6 +343,8 @@ myManagementHooks =
     , (className =? "Terminator") --> doF (W.shift "5:Research")
     , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
 
+    , (className =? "terminus") --> doF (W.shift "Extr2")
+
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
