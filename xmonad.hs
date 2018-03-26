@@ -243,7 +243,7 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask, xK_o), spawn "emacs")
+    , ((myModMask, xK_o), spawn "emacs-snapshot")
     , ((myModMask, xK_e), spawn "emacs")
     , ((myModMask, xK_p), spawn "synapse")
     , ((myModMask, xK_c), spawn "chromium-browse")
@@ -310,7 +310,7 @@ myManagementHooks =
     , className =? "rdesktop" --> doFloat
     , (className =? "TexMaker") --> doF (W.shift "3:Dev")
     , (className =? "Code") --> doF (W.shift "3:Dev")
-    , (className =? "Emacs") --> doF (W.shift "3:Dev")
+    , (className =? "Emacs-snapshot") --> doF (W.shift "3:Dev")
     , (className =? "jetbrains-pycharm") --> doF (W.shift "3:Dev")
     , (className =? "jetbrains-idea") --> doF (W.shift "3:Dev")
 
