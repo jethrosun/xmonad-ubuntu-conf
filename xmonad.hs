@@ -332,8 +332,8 @@ myManagementHooks =
     -- and float everything but the roster
     --, classNotRole ("Nocturn", "roster") --> doFloat
 
-    , (className =? "Chromium-browser") --> doF (W.shift "a")
-    , (className =? "Google-chrome") --> doF (W.shift "a")
+    , (className =? "Chromium-browser") --> doF (W.shift "web")
+    , (className =? "Google-chrome") --> doF (W.shift "sfx")
 
     , (className =? "Terminator") --> doF (W.shift "a")
     , (className =? "Mendeley Desktop") --> doF (W.shift "a")
