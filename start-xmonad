@@ -124,9 +124,6 @@ nitrogen --restore &
 # better start taffybar after the tray
 #taffybar &
 
-## Move to polybar
-$HOME/.xmonad/polybar/launch.sh &
-
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
 # as Empathy. This prevents prompts you may otherwise get for invalid
@@ -142,6 +139,9 @@ setxkbmap -option 'ctrl:swapcaps'
 nocturn &
 chromium-browser &
 xsetroot -cursor_name left_ptr &
+
+## Move to polybar
+#$HOME/.xmonad/polybar/launch.sh &
 
 
 # Now, finally, start xmonad
