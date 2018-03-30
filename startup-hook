@@ -41,13 +41,11 @@ fi
 # APPLICATION LAUNCHER
 #
 
-
 ## Move to polybar
 $HOME/.xmonad/polybar/launch.sh &
 
-
 # emacs server
-emacs --daemon &
+emacs-snapshot --daemon &
 
 # chromium
 if [-z "$(pgrep chromium-browser)"]; then

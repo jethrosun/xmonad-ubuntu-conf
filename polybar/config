@@ -31,7 +31,7 @@ font-3 = "Noto Sans Symbols2:size=10;1"
 modules-left = date ewmh xwindow
 modules-center =
 #modules-right = github eth wlan cpu battery
-modules-right = wlan cpu battery
+modules-right = eth wlan cpu battery
 
 tray-position = right
 tray-padding = 2
@@ -64,11 +64,36 @@ label-empty-foreground = #555555
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix = "💻 "
-format-prefix-foreground = ${colors.foreground-alt}
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU %percentage%%
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+;format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-label = %percentage:2%%
+;;label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -97,7 +122,7 @@ ramp-signal-4 = 🌣
 
 [module/eth]
 type = internal/network
-interface = enp0s25
+interface = enp0s31f6
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -150,7 +175,7 @@ label-full = " ☀ "
 
 [module/github]
 type = internal/github
-token = ${file:/home/jon/.config/github/notifications.token}
+token = ${file:/home/jethro/.config/github/notifications.token}
 empty-notifications = false
 ;label = %{u#ff9900 +u} %notifications% %{u-}
 label = %{u#0099ff +u} 📫 %{u-}
