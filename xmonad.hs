@@ -80,27 +80,22 @@ myUrgentWSRight = "}"
 
   I would recommend sticking with relatively brief workspace names
   because they are displayed in the xmobar status bar, where space
-                                                             can get tight. Also, the workspace labels are referred to elsewhere
-                                                          in the configuration file, so when you change a label you will have
+  can get tight. Also, the workspace labels are referred to elsewhere
+      in the configuration file, so when you change a label you will have
   to find places which refer to it and make a change there as well.
 
   This central organizational concept of this configuration is that
   the workspaces correspond to keys on the number pad, and that they
   are organized in a grid which also matches the layout of the number pad.
-    So, I don't recommend changing the number of workspaces unless you are
+  So, I don't recommend changing the number of workspaces unless you are
   prepared to delve into the workspace navigation keybindings section
   as well.
-    -}
+-}
 
-myWorkspaces =
-  [
-    "7:Dbg",  "8:Chat", "9:Web",
-    "4:Docs",  "5:Research", "6:Pix",
-    "1:Term",  "2:Hub", "3:Dev",
-    "0:VM",    "Extr1", "Extr2"
-  ]
+-- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
+myWorkspaces = ["term","web","code","a","b","c","doc","mx","sfx"]
 
-startupWorkspace = "1:Term"  -- which workspace do you want to be on after launch?
+startupWorkspace = "term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -207,10 +202,10 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 2 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "8:Chat" imLayout
-  $ onWorkspace "6:Pix" gimpLayout
-  $ onWorkspace "4:Docs" docLayout
-  $ onWorkspace "2:Hub" imLayout
+  -- onWorkspace "c" imLayout
+  -- $ onWorkspace "6:Pix" gimpLayout
+   onWorkspace "a" docLayout
+  $ onWorkspace "web" imLayout
   $ defaultLayouts
 
 
@@ -308,48 +303,48 @@ myManagementHooks =
     [ resource =? "synapse" --> doIgnore
     , resource =? "stalonetray" --> doIgnore
     , className =? "rdesktop" --> doFloat
-    , (className =? "TexMaker") --> doF (W.shift "3:Dev")
-    , (className =? "Code") --> doF (W.shift "3:Dev")
-    , (className =? "Emacs-snapshot") --> doF (W.shift "3:Dev")
-    , (className =? "jetbrains-pycharm") --> doF (W.shift "3:Dev")
-    , (className =? "jetbrains-idea") --> doF (W.shift "3:Dev")
+    , (className =? "TexMaker") --> doF (W.shift "code")
+    , (className =? "Code") --> doF (W.shift "code")
+    , (className =? "Emacs-snapshot") --> doF (W.shift "code")
+    , (className =? "jetbrains-pycharm") --> doF (W.shift "code")
+    , (className =? "jetbrains-idea") --> doF (W.shift "code")
 
-    , (className =? "Zathura") --> doF (W.shift "4:Docs")
-    , (className =? "Master PDF Editor") --> doF (W.shift "4:Docs")
-    , (className =? "Evince") --> doF (W.shift "4:Docs")
+    , (className =? "Zathura") --> doF (W.shift "docs")
+    , (className =? "Master PDF Editor") --> doF (W.shift "docs")
+    , (className =? "Evince") --> doF (W.shift "docs")
 
-    , (className =? "Meld") --> doF (W.shift "7:Dbg")
+    , (className =? "Meld") --> doF (W.shift "mx")
 
-    , (className =? "VirtualBox") --> doF (W.shift "0:VM")
-    , (className =? "Virt-manager") --> doF (W.shift "0:VM")
+    , (className =? "VirtualBox") --> doF (W.shift "sfx")
+    , (className =? "Virt-manager") --> doF (W.shift "sfx")
 
-    , (className =? "Firefox") --> doF (W.shift "9:Web")
-    , (className =? "vlc") --> doF (W.shift "9:Web")
+    , (className =? "Firefox") --> doF (W.shift "a")
+    , (className =? "vlc") --> doF (W.shift "a")
 
-    , (className =? "skypeforlinux") --> doF (W.shift "8:Chat")
-    , (className =? "Nocturn") --> doF (W.shift "8:Chat")
-    , (className =? "Slack") --> doF (W.shift "8:Chat")
-    , (className =? "Corebird") --> doF (W.shift "8:Chat")
-    , (className =? "Empathy") --> doF (W.shift "8:Chat")
-    , (className =? "Pidgin") --> doF (W.shift "8:Chat")
-    , (className =? "ScudCloud Slack") --> doF (W.shift "8:Chat")
+    --, (className =? "skypeforlinux") --> doF (W.shift "c")
+    , (className =? "Nocturn") --> doF (W.shift "a")
+    , (className =? "Slack") --> doF (W.shift "a")
+    , (className =? "Corebird") --> doF (W.shift "a")
+    , (className =? "Empathy") --> doF (W.shift "a")
+    , (className =? "Pidgin") --> doF (W.shift "a")
+    , (className =? "ScudCloud Slack") --> doF (W.shift "a")
 
     -- and float everything but the roster
     --, classNotRole ("Nocturn", "roster") --> doFloat
 
-    , (className =? "Chromium-browser") --> doF (W.shift "2:Hub")
-    , (className =? "Google-chrome") --> doF (W.shift "9:Web")
+    , (className =? "Chromium-browser") --> doF (W.shift "a")
+    , (className =? "Google-chrome") --> doF (W.shift "a")
 
-    , (className =? "Terminator") --> doF (W.shift "5:Research")
-    , (className =? "Mendeley Desktop") --> doF (W.shift "5:Research")
+    , (className =? "Terminator") --> doF (W.shift "a")
+    , (className =? "Mendeley Desktop") --> doF (W.shift "a")
 
-    , (className =? "terminus") --> doF (W.shift "Extr2")
+    , (className =? "terminus") --> doF (W.shift "a")
 
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-        , (className =? "XMind") --> doF (W.shift "6:Pix")
-    , (className =? "Gimp-2.8") --> doF (W.shift "6:Pix")
+        , (className =? "XMind") --> doF (W.shift "a")
+    , (className =? "Gimp-2.8") --> doF (W.shift "a")
     ]
     where
         classNotRole :: (String, String) -> Query Bool
