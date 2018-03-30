@@ -22,7 +22,7 @@ echo "Installing required packages..."
 sudo apt-get update
 sudo apt-get install -y xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar \
   xcompmgr nitrogen stalonetray moreutils consolekit xss-lock ssh-askpass-gnome \
-  thunar terminator remmina guake rxvt-unicode-256color taffybar
+  thunar terminator remmina guake rxvt-unicode-256color taffybar polybar
 
 echo "synapse bleeding edge version"
 sudo add-apt-repository ppa:synapse-core/testing
@@ -54,4 +54,5 @@ mv ~/.gtkrc-2.0 ~/gtkrc-2.0.original
 mv ~/.stalonetrayrc ~/.stalonetrayrc.original
 ln -s .xmonad/.gtkrc-2.0 ~/.gtkrc-2.0
 ln -s ~/.xmonad/taffybar ~/.config/taffybar
+ln -s ~/.xmonad/polybar ~/.config/polybar
 ln -s ~/.xmonad/.stalonetrayrc ~/.stalonetrayrc

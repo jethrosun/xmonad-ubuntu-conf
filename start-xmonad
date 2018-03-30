@@ -27,25 +27,25 @@ xcompmgr -n &
 #
 # Crusial here because only this can make it happen
 # -----------------------
-guake & 
+guake &
 
-ssh-add ~/.ssh/cloud.pem & 
-ssh-add ~/.ssh/jsun7 & 
+ssh-add ~/.ssh/cloud.pem &
+ssh-add ~/.ssh/jsun7 &
 ssh-add ~/.ssh/id_rsa &
 
 ($HOME/.dropbox-dist/dropboxd &) &
-urxvtd & 
+urxvtd &
 
 # TLP
 # https://wiki.archlinux.org/index.php/TLP
-tlp start & 
+tlp start &
 
 # Kill bluetooth
 rfkill block bluetooth
 
-# NOTE(jethro): 
+# NOTE(jethro):
 # on screen locking, I find the solution to be xss-lock (after trying all other
-# options online). Go to Gnome/Settings/Bright&Lock and turn off screen lock, 
+# options online). Go to Gnome/Settings/Bright&Lock and turn off screen lock,
 # now only use xss-lock to control the screen lock.
 # P.S. It worked perfect with Yubico keychain.
 xss-lock -- gnome-screensaver-command --lock &
@@ -122,7 +122,10 @@ nitrogen --restore &
 #&
 
 # better start taffybar after the tray
-taffybar &
+#taffybar &
+
+## Move to polybar
+$HOME/.xmonad/polybar/launch.sh &
 
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
@@ -135,10 +138,10 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 setxkbmap -option 'ctrl:swapcaps'
 
 ## Slack no more!
-#slack & 
-nocturn & 
-chromium-browser & 
-xsetroot -cursor_name left_ptr & 
+#slack &
+nocturn &
+chromium-browser &
+xsetroot -cursor_name left_ptr &
 
 
 # Now, finally, start xmonad
