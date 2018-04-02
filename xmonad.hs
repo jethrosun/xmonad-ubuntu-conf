@@ -49,7 +49,8 @@ myModMask            = mod4Mask          -- changes the mod key to "super"
 myFocusedBorderColor = "#ff0000"         -- color of focused border
 myNormalBorderColor  = "#cccccc"         -- color of inactive border
 myBorderWidth        = 1                 -- width of border around windows
-myTerminal           = "urxvtc"          -- gnome-terminal/terminator/urxvtc which terminal software to use
+myTerminal      = "alacritty"
+--myTerminal           = "urxvtc"          -- gnome-terminal/terminator/urxvtc which terminal software to use
 myIMRosterTitle      = "skype"           -- title of roster on IM workspace
                                          -- use "Buddy List" for Pidgin, but
                                          -- "Contact List" for Empathy
@@ -93,7 +94,7 @@ myUrgentWSRight = "}"
 -}
 
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
-myWorkspaces = ["term","web","code","a","b","c","doc","mx","sfx"]
+myWorkspaces = ["term","web","code","doc","mx","sfx","a","b","c"]
 
 startupWorkspace = "term"  -- which workspace do you want to be on after launch?
 
@@ -219,7 +220,7 @@ myLayouts =
   in xmonad. I have found this page useful -- just look
   for entries beginning with "xK":
 
-  http://xmonad.org/xmonad-docs/xmonad/doc-index-X.html
+  http://xmonad.org/xmonad-docs/xmonad/doc-endex-X.html
 
   Note that in the example below, the last three entries refer
   to nonstandard keys which do not have names assigned by
@@ -309,16 +310,16 @@ myManagementHooks =
     , (className =? "jetbrains-pycharm") --> doF (W.shift "code")
     , (className =? "jetbrains-idea") --> doF (W.shift "code")
 
-    , (className =? "Zathura") --> doF (W.shift "docs")
-    , (className =? "Master PDF Editor") --> doF (W.shift "docs")
-    , (className =? "Evince") --> doF (W.shift "docs")
+    , (className =? "Zathura") --> doF (W.shift "doc")
+    , (className =? "Master PDF Editor") --> doF (W.shift "doc")
+    , (className =? "Evince") --> doF (W.shift "doc")
 
     , (className =? "Meld") --> doF (W.shift "mx")
 
     , (className =? "VirtualBox") --> doF (W.shift "sfx")
     , (className =? "Virt-manager") --> doF (W.shift "sfx")
 
-    , (className =? "Firefox") --> doF (W.shift "a")
+    , (className =? "Firefox") --> doF (W.shift "web")
     , (className =? "vlc") --> doF (W.shift "a")
 
     --, (className =? "skypeforlinux") --> doF (W.shift "c")

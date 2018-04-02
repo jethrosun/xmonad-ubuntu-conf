@@ -41,6 +41,9 @@ fi
 # APPLICATION LAUNCHER
 #
 
+## tmux go!
+$HOME/bin/tmuxgo &
+
 ## Move to polybar
 $HOME/.xmonad/polybar/launch.sh &
 
@@ -65,6 +68,9 @@ fi
 
 # start flux
 $HOME/.xmonad/start-flux
+
+# setup my tmux then
+#$HOME/bin/br.sh
 
 # get the time zone rolling!
 #~/.local/bin/tzupdate

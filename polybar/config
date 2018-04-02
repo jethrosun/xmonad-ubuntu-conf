@@ -24,13 +24,16 @@ padding = 1
 module-margin = 1
 
 font-0 = "Noto Mono:size=10;1"
-font-1 = "Noto Sans Mono:size=10;1"
+#font-1 = "Noto Sans Mono:size=10;1"
+font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=20;1"
 font-2 = "Noto Sans Symbols:size=10;1"
-font-3 = "Noto Sans Symbols2:size=10;1"
+#font-3 = "Noto Sans Symbols2:size=10;1"
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-5 = "Font Awesome 5 Brands:pixelsize=8;1"
 
 modules-left = date ewmh xwindow
 modules-center =
-#modules-right = github eth wlan cpu battery
 modules-right = eth wlan cpu battery
 
 tray-position = right
@@ -64,36 +67,12 @@ label-empty-foreground = #555555
 
 [module/cpu]
 type = internal/cpu
-
-; Seconds to sleep between updates
-; Default: 1
-interval = 0.5
-
-; Available tags:
-;   <label> (default)
-;   <bar-load>
-;   <ramp-load>
-;   <ramp-coreload>
-format = <label> <ramp-coreload>
-
-; Available tokens:
-;   %percentage% (default) - total cpu load
-;   %percentage-cores% - load percentage for each core
-;   %percentage-core[1-9]% - load percentage for specific core
-label = CPU %percentage%%
-
-ramp-coreload-0 = ▁
-ramp-coreload-1 = ▂
-ramp-coreload-2 = ▃
-ramp-coreload-3 = ▄
-ramp-coreload-4 = ▅
-ramp-coreload-5 = ▆
-ramp-coreload-6 = ▇
-ramp-coreload-7 = █
-
-;format-prefix-foreground = ${colors.foreground-alt}
+interval = 2
+#format-prefix = "💻 "
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-;;label = %percentage:2%%
+label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
@@ -108,17 +87,84 @@ type = internal/network
 interface = wlp4s0
 interval = 5.0
 
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
 
-label-disconnected =
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
 
-ramp-signal-0 = 🌧
-ramp-signal-1 = 🌦
-ramp-signal-2 = 🌥
-ramp-signal-3 = 🌤
-ramp-signal-4 = 🌣
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <animation-packetloss> <label-connected>
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+label-connected = %essid% %downspeed:9%
+label-connected-foreground = #eefafafa
+ format-connected-underline = #9f78e1
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+; Default: (none)
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %linkspeed% [wired]
+; Default: (none)
+;label-packetloss = %essid%
+;label-packetloss-foreground = #eefafafa
+
+; Only applies if <ramp-signal> is used
+;; ;ramp-signal-0 = ▁
+; ;ramp-signal-1 = ▂
+; ;ramp-signal-2 = ▃
+; ;ramp-signal-3 = ▄
+; ;ramp-signal-4 = ▅
+; ;ramp-signal-5 = ▆
+; ;ramp-signal-6 = ▇
+ ramp-signal-0 = ▁
+ ramp-signal-1 = ▁▃
+ ramp-signal-2 = ▁▃▅
+ ramp-signal-3 = ▁▃▅▇
+
+## default
+#ramp-signal-0 = 😱
+#ramp-signal-1 = 😠
+#ramp-signal-2 = 😒
+#ramp-signal-3 = 😊
+#ramp-signal-4 = 😃
+#ramp-signal-5 = 😈
+
+## jonhoo
+# ramp-signal-0 = 🌧
+# ramp-signal-1 = 🌦
+# ramp-signal-2 = 🌥
+# ramp-signal-3 = 🌤
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
 
 [module/eth]
 type = internal/network
@@ -126,7 +172,9 @@ interface = enp0s31f6
 interval = 3.0
 
 format-connected-underline = #55aa55
-format-connected-prefix = "🖧 "
+#format-connected-prefix = "🖧 "
+format-connected-prefix = "  "
+
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
@@ -175,7 +223,7 @@ label-full = " ☀ "
 
 [module/github]
 type = internal/github
-token = ${file:/home/jethro/.config/github/notifications.token}
+token = ${file:/home/jon/.config/github/notifications.token}
 empty-notifications = false
 ;label = %{u#ff9900 +u} %notifications% %{u-}
 label = %{u#0099ff +u} 📫 %{u-}
