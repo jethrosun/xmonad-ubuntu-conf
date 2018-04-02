@@ -1,6 +1,19 @@
 xmonad-ubuntu-conf
 ==================
 
+Forked version of David Brewer's xmonad-config. My running system is 
+actually Ubuntu 17.10 on a Thinkpad machine. I modified the 
+configuration in various ways including my own stuff and some changes to 
+Xmonad.
+
+A brief list:
+* Polybar (not taffybar any more)
+* Redshift to replace F.lux
+
+
+Here begins the original README
+-------------------------------
+
 My xmonad config for Ubuntu 16.04, including package list, config files, and instructions. If you're on a different Ubuntu LTS release, take a look at the different branches available to see if there is one for you. The master branch is typically for the newest LTS.
 
 **Warning**: this is not yet thoroughly tested on 16.04. I was pleasantly surprised to find I didn't really need to change things much for Xenial -- we'll see if anything surfaces after I've used it for a while!

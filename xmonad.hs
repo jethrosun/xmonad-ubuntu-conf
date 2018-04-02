@@ -334,7 +334,7 @@ myManagementHooks =
     --, classNotRole ("Nocturn", "roster") --> doFloat
 
     , (className =? "Chromium-browser") --> doF (W.shift "web")
-    , (className =? "Google-chrome") --> doF (W.shift "sfx")
+    , (className =? "Google-chrome") --> doF (W.shift "c")
 
     , (className =? "Terminator") --> doF (W.shift "a")
     , (className =? "Mendeley Desktop") --> doF (W.shift "a")

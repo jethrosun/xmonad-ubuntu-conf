@@ -140,9 +140,5 @@ nocturn &
 chromium-browser &
 xsetroot -cursor_name left_ptr &
 
-## Move to polybar
-#$HOME/.xmonad/polybar/launch.sh &
-
-
 # Now, finally, start xmonad
 exec xmonad
