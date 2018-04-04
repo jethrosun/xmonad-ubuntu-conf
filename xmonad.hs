@@ -205,7 +205,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 2 (3/100) (3/4)))
 myLayouts =
   -- onWorkspace "c" imLayout
   -- $ onWorkspace "6:Pix" gimpLayout
-   onWorkspace "a" docLayout
+   onWorkspace "doc" docLayout
   $ onWorkspace "web" imLayout
   $ defaultLayouts
 

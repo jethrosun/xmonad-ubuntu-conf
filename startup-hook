@@ -69,8 +69,8 @@ fi
 # start flux
 $HOME/.xmonad/start-flux
 
-# setup my tmux then
-#$HOME/bin/br.sh
+## Hack: to avoid weird tmux issues
+$HOME/bin/br.sh ; tmux kill-server
 
 # get the time zone rolling!
 #~/.local/bin/tzupdate
