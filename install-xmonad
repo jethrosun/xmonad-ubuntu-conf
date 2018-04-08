@@ -45,7 +45,7 @@ sudo apt-get install -y redshift redshift-gtk
 cargo install --git https://github.com/jwilm/alacritty
 
 ## font and char
-sudo apt install -y font-powerline
+#sudo apt install -y font-powerline
 
 echo "Creating xmonad xsession configuration..."
 sudo mv /usr/share/xsessions/xmonad.desktop /usr/share/xsessions/xmonad.desktop.original

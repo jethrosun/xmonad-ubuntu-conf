@@ -69,8 +69,8 @@ fi
 # start flux
 $HOME/.xmonad/start-flux
 
-## Hack: to avoid weird tmux issues
-$HOME/bin/br.sh ; tmux kill-server
+# HACK: to fix the weird alacritty pacnic bug
+fcitx &
 
 # get the time zone rolling!
 #~/.local/bin/tzupdate
