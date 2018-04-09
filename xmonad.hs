@@ -319,7 +319,9 @@ myManagementHooks =
     , (className =? "VirtualBox") --> doF (W.shift "sfx")
     , (className =? "Virt-manager") --> doF (W.shift "sfx")
 
+    , (className =? "qutebrowser") --> doF (W.shift "web")
     , (className =? "Firefox") --> doF (W.shift "web")
+
     , (className =? "vlc") --> doF (W.shift "a")
 
     --, (className =? "skypeforlinux") --> doF (W.shift "c")
