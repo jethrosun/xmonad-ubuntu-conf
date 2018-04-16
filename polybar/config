@@ -38,7 +38,7 @@ modules-right = eth wlan cpu battery
 
 tray-position = right
 tray-padding = 2
-tray-maxsize = 24
+tray-maxsize = 32
 
 [global/wm]
 margin-top = 0
@@ -232,5 +232,11 @@ interval = 10
 
 [settings]
 screenchange-reload = true
+
+
+;; Additional fixes for ficitx
+_NET_WM_NAME(UTF8_STRING) = "Fcitx Tray Window"
+_XEMBED_INFO(_XEMBED_INFO) = 0x0, 0x1
+
 
 ; vim:ft=dosini

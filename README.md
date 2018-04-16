@@ -10,6 +10,10 @@ A brief list:
 * Polybar (not taffybar any more)
 * Redshift to replace F.lux
 
+TODO:
+* youtube video with mpsyt?
+dunst?
+
 
 Here begins the original README
 -------------------------------

@@ -31,6 +31,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Actions.Plane
 import XMonad.Hooks.EwmhDesktops        (ewmh)
 import XMonad.Hooks.ManageDocks
+--import XMonad.Layout.MultiToggle
+--import qualified XMonad.Layout.MultiToggle.Instances as Toggles
+import qualified XMonad.Layout.MultiToggle as MultiToggle
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.ManageHelpers
@@ -206,6 +209,8 @@ myLayouts =
   -- onWorkspace "c" imLayout
   -- $ onWorkspace "6:Pix" gimpLayout
    onWorkspace "doc" docLayout
+  $ MultiToggle.mkToggle (MultiToggle.single REFLECTX)
+  $ MultiToggle.mkToggle (MultiToggle.single REFLECTY)
   $ onWorkspace "web" imLayout
   $ defaultLayouts
 
@@ -224,7 +229,7 @@ myLayouts =
 
   Note that in the example below, the last three entries refer
   to nonstandard keys which do not have names assigned by
-                               xmonad. That's because they are the volume and mute keys
+  xmonad. That's because they are the volume and mute keys
   on my laptop, a Lenovo W520.
 
   If you have special keys on your keyboard which you
@@ -239,9 +244,11 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
+    , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
+    , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
     , ((myModMask, xK_o), spawn "emacs-snapshot")
     , ((myModMask, xK_e), spawn "emacs")
-    , ((myModMask, xK_p), spawn "synapse")
+    , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
     , ((myModMask, xK_c), spawn "chromium-browse")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
     , ((myModMask, xK_t), spawn "thunar")
@@ -259,7 +266,7 @@ myKeyBindings =
   Management hooks. You can use management hooks to enforce certain
   behaviors when specific programs or windows are launched. This is
   useful if you want certain windows to not be managed by xmonad,
-            or sent to a specific workspace, or otherwise handled in a special
+  or sent to a specific workspace, or otherwise handled in a special
   way.
 
   Each entry within the list of hooks defines a way to identify a
@@ -286,7 +293,7 @@ myKeyBindings =
 
   Once you've pinpointed the window you want to manipulate, here are
   a few examples of things you might do with that window:
-                                        - doIgnore: this tells xmonad to completely ignore the window. It will
+        - doIgnore: this tells xmonad to completely ignore the window. It will
       not be tiled or floated. Useful for things like launchers and
       trays.
         - doFloat: this tells xmonad to float the window rather than tiling
@@ -303,7 +310,7 @@ myManagementHooks :: [ManageHook]
 myManagementHooks =
     [ resource =? "synapse" --> doIgnore
     , resource =? "stalonetray" --> doIgnore
-    , className =? "rdesktop" --> doFloat
+    , className =? "mpv" --> doFloat
     , (className =? "TexMaker") --> doF (W.shift "code")
     , (className =? "Code") --> doF (W.shift "code")
     , (className =? "Emacs-snapshot") --> doF (W.shift "code")
@@ -327,6 +334,7 @@ myManagementHooks =
     --, (className =? "skypeforlinux") --> doF (W.shift "c")
     , (className =? "Nocturn") --> doF (W.shift "a")
     , (className =? "Slack") --> doF (W.shift "a")
+    , (className =? "desktop") --> doF (W.shift "a") -- reMarkable
     , (className =? "Corebird") --> doF (W.shift "a")
     , (className =? "Empathy") --> doF (W.shift "a")
     , (className =? "Pidgin") --> doF (W.shift "a")

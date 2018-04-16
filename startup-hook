@@ -69,8 +69,11 @@ fi
 # start flux
 $HOME/.xmonad/start-flux
 
+## dunst
+dunst -conf ~/.xmonad/dunst/dunstrc &
+
 # HACK: to fix the weird alacritty pacnic bug
-fcitx &
+#fcitx &
 
 # get the time zone rolling!
 #~/.local/bin/tzupdate
