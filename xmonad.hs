@@ -40,6 +40,8 @@ import XMonad.Hooks.ManageHelpers
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
+-- control floating window
+import XMonad.Hooks.Place
 
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 
@@ -461,6 +463,7 @@ main = do
       windows $ W.greedyView startupWorkspace
       spawn "~/.xmonad/startup-hook"
     , manageHook = manageHook defaultConfig
+      <+> placeHook (withGaps (16,0,16,0) (smart (1,0.95)))
       <+> composeAll myManagementHooks
       <+> manageDocks
     }
