@@ -42,10 +42,10 @@ fi
 #
 
 ## tmux go!
-$HOME/bin/tmuxgo &
+#$HOME/bin/tmuxgo &
 
 ## Move to polybar
-$HOME/.xmonad/polybar/launch.sh &
+sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh &
 
 # emacs server
 emacs-snapshot --daemon &

@@ -1,6 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-UID=jethros
+#UID=jethros
 # Terminate already running bar instances
 killall -q polybar
 
@@ -8,15 +8,15 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if xrandr --query | grep " connected" | grep "DP-2" > /dev/null; then
-	m=$(xrandr --query | grep " connected" | grep "DP-2" | cut -d" " -f1)
+  m=$(xrandr --query | grep " connected" | grep "DP-2" | cut -d" " -f1)
 else
-	m=$(xrandr --query | grep " connected" | grep primary | cut -d" " -f1)
+  m=$(xrandr --query | grep " connected" | grep primary | cut -d" " -f1)
 fi
 
 cmd=$(env "MONITOR=$m"  polybar --reload main)
 
 if [[ $# -gt 0 ]] && [[ $1 = "block" ]]; then
-	exec "${cmd[@]}"
+  exec "${cmd[@]}"
 else
-	"${cmd[@]}" &
+  "${cmd[@]}" &
 fi
