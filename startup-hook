@@ -44,9 +44,6 @@ fi
 ## tmux go!
 #$HOME/bin/tmuxgo &
 
-## Move to polybar
-sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh &
-
 # emacs server
 emacs-snapshot --daemon &
 
@@ -77,6 +74,9 @@ dunst -conf ~/.xmonad/dunst/dunstrc &
 
 # get the time zone rolling!
 #~/.local/bin/tzupdate
+
+## Move to polybar
+sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh &
 
 # HACK
 xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of eDP-1

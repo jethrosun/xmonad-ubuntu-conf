@@ -254,9 +254,11 @@ myKeyBindings =
     , ((myModMask, xK_c), spawn "chromium-browse")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
     , ((myModMask, xK_t), spawn "thunar")
-    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")
---    , ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
---    , ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
+    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
+    , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
+    , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a")  -- interactive screenshot
+    --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
+    --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
     , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
     , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
@@ -312,7 +314,7 @@ myManagementHooks :: [ManageHook]
 myManagementHooks =
     [ resource =? "synapse" --> doIgnore
     , resource =? "stalonetray" --> doIgnore
-    , className =? "mpv" --> doFloat
+    , className =? "mpv" --> doFloat <+> doF (W.shift "term")
     , (className =? "TexMaker") --> doF (W.shift "code")
     , (className =? "Code") --> doF (W.shift "code")
     , (className =? "Emacs-snapshot") --> doF (W.shift "code")
@@ -463,7 +465,7 @@ main = do
       windows $ W.greedyView startupWorkspace
       spawn "~/.xmonad/startup-hook"
     , manageHook = manageHook defaultConfig
-      <+> placeHook (withGaps (16,0,16,0) (smart (1,0.95)))
+      <+> placeHook (withGaps (16,0,16,0) (smart (1,0.98))) -- save some space for polybar
       <+> composeAll myManagementHooks
       <+> manageDocks
     }
