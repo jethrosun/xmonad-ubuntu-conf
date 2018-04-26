@@ -327,8 +327,8 @@ myManagementHooks =
 
     , (className =? "Meld") --> doF (W.shift "mx")
 
-    , (className =? "VirtualBox") --> doF (W.shift "sfx")
-    , (className =? "Virt-manager") --> doF (W.shift "sfx")
+    , (className =? "VirtualBox") --> doF (W.shift "b")
+    , (className =? "Virt-manager") --> doF (W.shift "b")
 
     , (className =? "qutebrowser") --> doF (W.shift "web")
     , (className =? "Firefox") --> doF (W.shift "web")

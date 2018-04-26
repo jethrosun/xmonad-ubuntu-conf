@@ -37,7 +37,7 @@ sudo add-apt-repository ppa:linrunner/tlp
 sudo apt-get update
 sudo apt-get install -y tlp tlp-rdw
 # thinkpad only
-sudo apt-get install -y  tp-smapi-dkms # acpi-call-tools
+sudo apt-get install -y  tp-smapi-dkms acpi-call-dkms
 
 # install redshift for now, xflux is breaking :(
 sudo apt-get install -y redshift redshift-gtk
