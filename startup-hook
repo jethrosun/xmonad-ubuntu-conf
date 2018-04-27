@@ -76,10 +76,13 @@ dunst -conf ~/.xmonad/dunst/dunstrc &
 #~/.local/bin/tzupdate
 
 ## Move to polybar
-sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh &
+sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh
+
+# hot plug
+sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &
 
 # HACK
-xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of eDP-1
+#xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of eDP-1
 
 # On login, we unlock the ssh keychain so we're not prompted for
 # passphrases later. We pipe /dev/null to ssh-add to make it realize

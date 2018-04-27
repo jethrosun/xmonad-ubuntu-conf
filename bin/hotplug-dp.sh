@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read STATUS_DP < /sys/class/drm/card0-DP-1/status
+read STATUS_DP < /sys/class/drm/card0-DP-2/status
 read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
 read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
 export DISPLAY=:0
@@ -25,8 +25,8 @@ DEVC=""
 STATUS="disconnected"
 if [[ "$STATUS_DP" = "connected" ]]; then
   STATUS="conected"
-  DEV="DP-1"
-  DEVC="DP-1"
+  DEV="DP-2"
+  DEVC="DP-2"
 elif [[ "$STATUS_HDMI" = "connected" ]]; then
   STATUS="connected"
   DEV="HDMI-1"
@@ -38,7 +38,7 @@ elif [[ "$STATUS_HDMI2" = "connected" ]]; then
 fi
 
 if [ "$STATUS" = "disconnected" ]; then
-  /usr/bin/xrandr --output DP-1 --off
+  /usr/bin/xrandr --output DP-2 --off
   /usr/bin/xrandr --output HDMI-1 --off
   /usr/bin/xrandr --output HDMI-2 --off
   /usr/bin/xrandr --output eDP-1 --mode 1920x1440
@@ -53,8 +53,10 @@ else
     /usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
   else
     edid=$(/usr/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /usr/bin/sed 's/\s*-$//')
+    print $edid
 
-    pos="above"
+    #pos="above"
+    pos="right-of"
     case "$edid" in
       "9ed75b31c6f1bce5db7420887ebbc71c126d6a152ddf00b2b5bbb7a5479cea2608273bfcae23d8ec7bcf01578256d672c5fb0d899005f46096ef98dc447d2244")
         pos="primary --rotate left --right-of"
@@ -80,7 +82,7 @@ fi
 
 # notify-osd doesn't need to be restored
 /usr/bin/pkill notify-osd
-/usr/bin/sudo -E -u jon nitrogen --restore
-/usr/bin/sudo -E -u jon /home/jon/.config/polybar/launch.sh
+/usr/bin/sudo -E -u jethros nitrogen --restore
+/usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
 
 # /usr/bin/systemctl restart systemd-logind
