@@ -2,22 +2,22 @@
 
 read STATUS_DP < /sys/class/drm/card0-DP-2/status
 read STATUS_HDMI < /sys/class/drm/card0-HDMI-A-1/status
-read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
+#read STATUS_HDMI2 < /sys/class/drm/card0-HDMI-A-2/status
 export DISPLAY=:0
-export XAUTHORITY=/home/jon/.Xauthority
+#export XAUTHORITY=/home/jon/.Xauthority
 
 maxlight() {
   /bin/cat /sys/class/backlight/intel_backlight/max_brightness > /sys/class/backlight/intel_backlight/brightness
 }
 
 lowdpi() {
-  /usr/bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 96/' ~jon/.Xresources
-  /usr/bin/sudo -E -u jon xrdb ~jon/.Xresources
+  /bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 96/' ~/.Xresources
+  /usr/bin/sudo -E -u jethros xrdb ~/.Xresources
 }
 
 hidpi() {
-  /usr/bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 144/' ~jon/.Xresources
-  /usr/bin/sudo -u jon xrdb ~jon/.Xresources
+  /bin/sed -i 's/Xft.dpi: .*/Xft.dpi: 144/' ~/.Xresources
+  /usr/bin/sudo -u jethros xrdb ~/.Xresources
 }
 
 DEV=""
@@ -41,22 +41,25 @@ if [ "$STATUS" = "disconnected" ]; then
   /usr/bin/xrandr --output DP-2 --off
   /usr/bin/xrandr --output HDMI-1 --off
   /usr/bin/xrandr --output HDMI-2 --off
-  /usr/bin/xrandr --output eDP-1 --mode 1920x1440
+  #/usr/bin/xrandr --output eDP-1 --mode 1920x1440
   /usr/bin/xrandr --output eDP-1 --auto
-  /usr/bin/xset +dpms
-  /usr/bin/xset s default
-  hidpi
-  /usr/bin/sed -i 's/HandleLidSwitch\=ignore/HandleLidSwitch\=suspend/' /etc/systemd/logind.conf
+  #/usr/bin/xset +dpms
+  #/usr/bin/xset s default
+  #hidpi
+  #/usr/bin/sed -i 's/HandleLidSwitch\=ignore/HandleLidSwitch\=suspend/' /etc/systemd/logind.conf
 else
   if [[ $1 == "mirror" ]]; then
-    /usr/bin/xrandr --output $DEV --mode 1024x768
-    /usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
+    #/usr/bin/xrandr --output $DEV --mode 1024x768
+    #/usr/bin/xrandr --output eDP-1 --mode 1024x768 --same-as $DEV
+    /usr/bin/xrandr --output $DEV --auto
+    /usr/bin/xrandr --output eDP-1 --auto --same-as $DEV
   else
-    edid=$(/usr/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /usr/bin/sed 's/\s*-$//')
+    edid=$(/bin/cat /sys/class/drm/card0/card0-$DEVC/edid | /usr/bin/sha512sum - | /bin/sed 's/\s*-$//')
     print $edid
 
-    #pos="above"
-    pos="right-of"
+    ## For some reasons it can only be top down
+    pos="above"
+    #pos="right-of"
     case "$edid" in
       "9ed75b31c6f1bce5db7420887ebbc71c126d6a152ddf00b2b5bbb7a5479cea2608273bfcae23d8ec7bcf01578256d672c5fb0d899005f46096ef98dc447d2244")
         pos="primary --rotate left --right-of"
@@ -68,16 +71,17 @@ else
         maxlight
         ;;
     esac
-    /usr/bin/xrandr --addmode eDP-1 1920x1080
-    /usr/bin/xrandr --output eDP-1 --mode 1920x1080 --output $DEV --$pos eDP-1 --auto
+    #/usr/bin/xrandr --addmode eDP-1 1920x1080
+    /usr/bin/xrandr --output eDP-1 --auto 
+    /usr/bin/xrandr --output $DEV --auto --$pos eDP-1
   fi
-  /usr/bin/xset -dpms
-  /usr/bin/xset s off
+  #/usr/bin/xset -dpms
+  #/usr/bin/xset s off
 
-  /usr/bin/xrandr --dpi 96
-  lowdpi
+  #/usr/bin/xrandr --dpi 96
+  #lowdpi
 
-  /usr/bin/sed -i 's/HandleLidSwitch\=suspend/HandleLidSwitch\=ignore/' /etc/systemd/logind.conf
+  #/bin/sed -i 's/HandleLidSwitch\=suspend/HandleLidSwitch\=ignore/' /etc/systemd/logind.conf
 fi
 
 # notify-osd doesn't need to be restored

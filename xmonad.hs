@@ -260,6 +260,7 @@ myKeyBindings =
     --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
     --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
+    , ((myModMask, xK_F1), spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
     , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
     , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where
@@ -430,7 +431,7 @@ myThinkpadKeys = [
         --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
         --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Speaker unmute")
         , ("<XF86AudioMute>", spawn "amixer set Master toggle &")
-        , ("<XF86Display>", spawn "sudo -E $HOME/.xmonad/bin/hotplug-dp.sh &")
+        , ("<XF86Display>", spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
           -- FIXME:
         , ("<XF86MonBrightnessUp>"  , spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
         , ("<XF86MonBrightnessDown>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")

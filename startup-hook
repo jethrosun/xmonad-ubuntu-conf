@@ -76,7 +76,7 @@ dunst -conf ~/.xmonad/dunst/dunstrc &
 #~/.local/bin/tzupdate
 
 ## Move to polybar
-sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh
+#sudo -E -u jethros $HOME/.xmonad/polybar/launch.sh
 
 # hot plug
 sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &
