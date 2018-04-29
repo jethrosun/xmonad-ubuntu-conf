@@ -253,7 +253,7 @@ myKeyBindings =
     , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
     , ((myModMask, xK_c), spawn "chromium-browse")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
-    , ((myModMask, xK_t), spawn "thunar")
+    , ((myModMask, xK_t), spawn "caja")
     , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
     , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
     , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a")  -- interactive screenshot
