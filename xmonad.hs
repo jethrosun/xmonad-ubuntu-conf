@@ -338,7 +338,7 @@ myManagementHooks =
 
     --, (className =? "skypeforlinux") --> doF (W.shift "c")
     , (className =? "Nocturn") --> doF (W.shift "a")
-    , (className =? "Slack") --> doF (W.shift "a")
+    , (className =? "Slack") --> doF (W.shift "b")
     , (className =? "desktop") --> doF (W.shift "a") -- reMarkable
     , (className =? "Corebird") --> doF (W.shift "a")
     , (className =? "Empathy") --> doF (W.shift "a")
