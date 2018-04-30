@@ -88,6 +88,6 @@ fi
 /usr/bin/pkill notify-osd
 /usr/bin/sudo -E -u jethros nitrogen --restore
 /usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
-/usr/bin/sudo -E -u jethros /home/jethros/.xmonad/bin/touchpad-setup.sh
+#/usr/bin/sudo -E -u jethros /home/jethros/.xmonad/bin/touchpad-setup.sh
 
 # /usr/bin/systemctl restart systemd-logind

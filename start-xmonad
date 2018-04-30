@@ -140,5 +140,7 @@ nocturn &
 chromium-browser &
 xsetroot -cursor_name left_ptr &
 
+sudo -E -u jethro ~/.xmonad/bin/touchpad-setup.sh &
+
 # Now, finally, start xmonad
 exec xmonad
