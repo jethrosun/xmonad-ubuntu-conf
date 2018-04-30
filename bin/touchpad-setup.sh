@@ -1,4 +1,5 @@
 #!/bin/bash
+#set -ex
 
 # I disabled my touchpad because I hate those things. You can find the id
 # of a device you want to disable using "xinput list"; unfortunately it can
