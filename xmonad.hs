@@ -248,15 +248,18 @@ myKeyBindings =
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
     , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
-    , ((myModMask, xK_o), spawn "emacs-snapshot")
-    , ((myModMask, xK_e), spawn "emacs")  -- broken
+    --, ((myModMask, xK_o), spawn "emacs-snapshot")
+    , ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
+    , ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
     , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
-    --, ((myModMask, xK_c), spawn "chromium-browse")
-    , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
-    -- it is broken for some unknow reason
-    , ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
+    , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
+    -- Different browsers
+    , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
+    , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
+    --, ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
     , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
     , ((myModMask, xK_t), spawn "caja")
+    , ((myModMask, xK_f), spawn "caja .")
     , ((myModMask, xK_c), spawn "caja")
     , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
     , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
@@ -324,6 +327,7 @@ myManagementHooks =
     , (className =? "TexMaker") --> doF (W.shift "code")
     , (className =? "Code") --> doF (W.shift "code")
     , (className =? "Emacs-snapshot") --> doF (W.shift "code")
+    , (className =? "Emacs") --> doF (W.shift "code")
     , (className =? "jetbrains-pycharm") --> doF (W.shift "code")
     , (className =? "jetbrains-idea") --> doF (W.shift "code")
 
@@ -343,7 +347,7 @@ myManagementHooks =
 
     , (className =? "vlc") --> doF (W.shift "a")
 
-    --, (className =? "skypeforlinux") --> doF (W.shift "c")
+    , (className =? "Skype") --> doF (W.shift "b")
     , (className =? "Nocturn") --> doF (W.shift "a")
     , (className =? "Slack") --> doF (W.shift "b")
     , (className =? "desktop") --> doF (W.shift "a") -- reMarkable
@@ -366,7 +370,7 @@ myManagementHooks =
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
     , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-        , (className =? "XMind") --> doF (W.shift "a")
+    , (className =? "XMind") --> doF (W.shift "a")
     , (className =? "Gimp-2.8") --> doF (W.shift "a")
     ]
     where
@@ -436,8 +440,8 @@ myThinkpadKeys = [
         --, ("M-<XF86AudioLowerVolume>", spawn "amixer set Master 3dB-")
         , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
         --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
-        --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Speaker unmute")
-        , ("<XF86AudioMute>", spawn "amixer set Master toggle &")
+        --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Headphone unmute &")
+        , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle &")
         , ("<XF86Display>", spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
           -- FIXME:
         , ("<XF86MonBrightnessUp>"  , spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
@@ -475,7 +479,7 @@ main = do
       windows $ W.greedyView startupWorkspace
       spawn "~/.xmonad/startup-hook"
     , manageHook = manageHook defaultConfig
-      <+> placeHook (withGaps (16,0,16,0) (smart (1,0.98))) -- save some space for polybar
+      -- <+> placeHook (withGaps (16,0,16,0) (smart (1,0.98))) -- save some space for polybar
       <+> composeAll myManagementHooks
       <+> manageDocks
     }

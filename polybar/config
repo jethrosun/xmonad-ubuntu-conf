@@ -38,7 +38,7 @@ modules-right = eth wlan cpu battery
 
 tray-position = right
 tray-padding = 2
-tray-maxsize = 32
+tray-maxsize = 24
 
 [global/wm]
 margin-top = 0

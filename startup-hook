@@ -64,7 +64,7 @@ if [-z "$(pgrep run_keybase)"]; then
 fi
 
 # start flux
-$HOME/.xmonad/start-flux
+$HOME/.xmonad/bin/start-flux
 
 ## dunst
 dunst -conf ~/.xmonad/dunst/dunstrc &
