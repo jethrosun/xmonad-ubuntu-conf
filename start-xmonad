@@ -137,7 +137,7 @@ setxkbmap -option 'ctrl:swapcaps'
 ## Slack no more!
 #slack &
 nocturn &
-chromium-browser &
+#chromium-browser &
 xsetroot -cursor_name left_ptr &
 
 sudo -E -u jethro ~/.xmonad/bin/touchpad-setup.sh &

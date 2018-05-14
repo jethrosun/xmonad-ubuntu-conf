@@ -249,13 +249,18 @@ myKeyBindings =
     , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
     , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
     , ((myModMask, xK_o), spawn "emacs-snapshot")
-    , ((myModMask, xK_e), spawn "emacs")
+    , ((myModMask, xK_e), spawn "emacs")  -- broken
     , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
-    , ((myModMask, xK_c), spawn "chromium-browse")
+    --, ((myModMask, xK_c), spawn "chromium-browse")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browse")
+    -- it is broken for some unknow reason
+    , ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
+    , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
     , ((myModMask, xK_t), spawn "caja")
+    , ((myModMask, xK_c), spawn "caja")
     , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
     , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
+    -- it is broken for some unknow reason
     , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a")  -- interactive screenshot
     --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
     --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
@@ -328,11 +333,13 @@ myManagementHooks =
 
     , (className =? "Meld") --> doF (W.shift "mx")
 
+    , (className =? "Mailspring") --> doF (W.shift "b")
     , (className =? "VirtualBox") --> doF (W.shift "b")
     , (className =? "Virt-manager") --> doF (W.shift "b")
 
     , (className =? "qutebrowser") --> doF (W.shift "web")
     , (className =? "Firefox") --> doF (W.shift "web")
+    , (className =? "Firefox Developer Edition") --> doF (W.shift "web")
 
     , (className =? "vlc") --> doF (W.shift "a")
 
@@ -352,7 +359,7 @@ myManagementHooks =
     , (className =? "Google-chrome") --> doF (W.shift "c")
 
     , (className =? "Terminator") --> doF (W.shift "a")
-    , (className =? "Mendeley Desktop") --> doF (W.shift "a")
+    , (className =? "Mendeley Desktop") --> doF (W.shift "b")
 
     , (className =? "terminus") --> doF (W.shift "a")
 

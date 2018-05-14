@@ -48,9 +48,9 @@ fi
 emacs-snapshot --daemon &
 
 # chromium
-if [-z "$(pgrep chromium-browser)"]; then
-  chromium-browser &
-fi
+#if [-z "$(pgrep chromium-browser)"]; then
+#  chromium-browser &
+#fi
 
 ## deprecated because there is official slack now
 # slack
