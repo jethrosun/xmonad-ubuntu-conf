@@ -45,7 +45,6 @@ fi
 #$HOME/bin/tmuxgo &
 
 # emacs server
-emacs-snapshot --daemon &
 
 # chromium
 #if [-z "$(pgrep chromium-browser)"]; then
@@ -64,7 +63,7 @@ if [-z "$(pgrep run_keybase)"]; then
 fi
 
 # start flux
-$HOME/.xmonad/bin/start-flux
+$HOME/.xmonad/bin/start-redshift
 
 ## dunst
 dunst -conf ~/.xmonad/dunst/dunstrc &

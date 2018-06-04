@@ -248,16 +248,21 @@ myKeyBindings =
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
     , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
-    --, ((myModMask, xK_o), spawn "emacs-snapshot")
+-- IDE
+    , ((myModMask .|. shiftMask, xK_i), spawn "$HOME/.local/bin/emacs")
     , ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
-    , ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
+    , ((myModMask .|. shiftMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
+    --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
+
     , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
     , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
+
     -- Different browsers
     , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
     , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
     --, ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
     , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
+
     , ((myModMask, xK_t), spawn "caja")
     , ((myModMask, xK_f), spawn "caja .")
     , ((myModMask, xK_c), spawn "caja")
