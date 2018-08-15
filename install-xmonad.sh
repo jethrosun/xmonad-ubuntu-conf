@@ -59,6 +59,5 @@ echo "Linking to customized gnome 2 configuration..."
 mv ~/.gtkrc-2.0 ~/gtkrc-2.0.original
 mv ~/.stalonetrayrc ~/.stalonetrayrc.original
 ln -s .xmonad/.gtkrc-2.0 ~/.gtkrc-2.0
-#ln -s ~/.xmonad/taffybar ~/.config/taffybar
 ln -s ~/.xmonad/polybar ~/.config/polybar
-ln -s ~/.xmonad/.stalonetrayrc ~/.stalonetrayrc
+#ln -s ~/.xmonad/.stalonetrayrc ~/.stalonetrayrc

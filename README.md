@@ -9,6 +9,8 @@ Xmonad.
 A brief list:
 * Polybar (not taffybar any more)
 * Redshift to replace F.lux
+* alacritty as the terminal
+* tmux to manage multiple terminal sessions locally
 
 TODO:
 * youtube video with mpsyt?

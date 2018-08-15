@@ -218,69 +218,6 @@ myLayouts =
 
 
 {-
-  Custom keybindings. In this section we define a list of relatively
-  straightforward keybindings. This would be the clearest place to
-  add your own keybindings, or change the keys we have defined
-  for certain functions.
-
-  It can be difficult to find a good list of keycodes for use
-  in xmonad. I have found this page useful -- just look
-  for entries beginning with "xK":
-
-  http://xmonad.org/xmonad-docs/xmonad/doc-endex-X.html
-
-  Note that in the example below, the last three entries refer
-  to nonstandard keys which do not have names assigned by
-  xmonad. That's because they are the volume and mute keys
-  on my laptop, a Lenovo W520.
-
-  If you have special keys on your keyboard which you
-  want to bind to specific actions, you can use the "xev"
-  command-line tool to determine the code for a specific key.
-    Launch the command, then type the key in question and watch
-  the output.
-    -}
-
-myKeyBindings =
-  [
-    ((myModMask, xK_b), sendMessage ToggleStruts)
-    , ((myModMask, xK_a), sendMessage MirrorShrink)
-    , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
-    , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
--- IDE
-    , ((myModMask .|. shiftMask, xK_i), spawn "$HOME/.local/bin/emacs")
-    , ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
-    , ((myModMask .|. shiftMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
-    --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
-
-    , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
-    , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
-
-    -- Different browsers
-    , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
-    , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
-    --, ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
-    , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
-
-    , ((myModMask, xK_t), spawn "caja")
-    , ((myModMask, xK_f), spawn "caja .")
-    , ((myModMask, xK_c), spawn "caja")
-    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
-    , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
-    -- it is broken for some unknow reason
-    , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a")  -- interactive screenshot
-    --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
-    --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
-    , ((myModMask, xK_u), focusUrgent)
-    , ((myModMask, xK_F1), spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
-    , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
-    , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
-  ] --where
-    --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
-    --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
-
-{-
   Management hooks. You can use management hooks to enforce certain
   behaviors when specific programs or windows are launched. This is
   useful if you want certain windows to not be managed by xmonad,
@@ -438,6 +375,72 @@ myKeys = myKeyBindings ++
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
         ]
+
+{-
+  Custom keybindings. In this section we define a list of relatively
+  straightforward keybindings. This would be the clearest place to
+  add your own keybindings, or change the keys we have defined
+  for certain functions.
+
+  It can be difficult to find a good list of keycodes for use
+  in xmonad. I have found this page useful -- just look
+  for entries beginning with "xK":
+
+  http://xmonad.org/xmonad-docs/xmonad/doc-endex-X.html
+
+  Note that in the example below, the last three entries refer
+  to nonstandard keys which do not have names assigned by
+  xmonad. That's because they are the volume and mute keys
+  on my laptop, a Lenovo W520.
+
+  If you have special keys on your keyboard which you
+  want to bind to specific actions, you can use the "xev"
+  command-line tool to determine the code for a specific key.
+    Launch the command, then type the key in question and watch
+  the output.
+    -}
+
+myKeyBindings =
+  [
+    ((myModMask, xK_b), sendMessage ToggleStruts)
+    , ((myModMask, xK_a), sendMessage MirrorShrink)
+    , ((myModMask, xK_z), sendMessage MirrorExpand)
+    , ((myModMask .|. shiftMask , xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
+    , ((myModMask .|. shiftMask , xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
+    -- IDE
+    , ((myModMask .|. shiftMask, xK_i), spawn "/usr/bin/emacs-snapshot")
+    --, ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
+    , ((myModMask .|. shiftMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
+    --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
+
+    , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
+    , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
+
+    -- Different browsers
+    , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
+    , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
+    --, ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
+    , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
+
+    , ((myModMask, xK_f), spawn "caja .")
+    , ((myModMask, xK_c), spawn "caja")
+   , ((myModMask .|. shiftMask, xK_c), spawn "caja")
+    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
+    , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
+    , ((0, xK_Print), spawn "gnome-screenshot")  -- screenshot
+    -- it is broken for some unknow reason
+    , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a")  -- interactive screenshot
+    --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
+    --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
+    , ((myModMask, xK_u), focusUrgent)
+    , ((myModMask, xK_F1), spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
+    , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+    , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
+  ] --where
+    --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
+    --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
+
+
 
 myThinkpadKeys :: [(String, X())]
 myThinkpadKeys = [

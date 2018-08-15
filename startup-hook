@@ -62,6 +62,12 @@ if [-z "$(pgrep run_keybase)"]; then
   run_keybase &
 fi
 
+# buzz
+#if [-z "$(pgrep buzz)"]; then
+	#buzz &
+#fi
+
+
 # start flux
 $HOME/.xmonad/bin/start-redshift
 
