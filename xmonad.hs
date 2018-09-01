@@ -424,8 +424,9 @@ myKeyBindings =
 
     , ((myModMask, xK_f), spawn "caja .")
     , ((myModMask, xK_c), spawn "caja")
-   , ((myModMask .|. shiftMask, xK_c), spawn "caja")
-    , ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
+		, ((myModMask .|. shiftMask, xK_c), spawn "caja")
+    --, ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
+    , ((myModMask .|. shiftMask, xK_l), spawn "slock")  -- new screenlock
     , ((myModMask, xK_s), spawn "gnome-screenshot")  -- screenshot
     , ((0, xK_Print), spawn "gnome-screenshot")  -- screenshot
     -- it is broken for some unknow reason
