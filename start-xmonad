@@ -133,6 +133,7 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 # Remap caps lock to left control. This is not strictly speaking
 # xmonad related, but it's handy if you're a vim user.
 setxkbmap -option 'ctrl:swapcaps'
+setxkbmap -option 'altwin:swap_alt_win'
 
 ## Slack no more!
 #slack &
