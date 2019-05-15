@@ -434,7 +434,7 @@ myKeyBindings =
     --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
     --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
     , ((myModMask, xK_u), focusUrgent)
-    , ((myModMask, xK_F1), spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
+    , ((myModMask, xK_F1), spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh mirror &")
     , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
     , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
   ] --where

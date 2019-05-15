@@ -7,8 +7,8 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-if xrandr --query | grep " connected" | grep "DP-2" > /dev/null; then
-  m=$(xrandr --query | grep " connected" | grep "DP-2" | cut -d" " -f1)
+if xrandr --query | grep " connected" | grep "HDMI-1" > /dev/null; then
+  m=$(xrandr --query | grep " connected" | grep "HDMI-1" | cut -d" " -f1)
 else
   m=$(xrandr --query | grep " connected" | grep primary | cut -d" " -f1)
 fi

@@ -72,7 +72,7 @@ else
         ;;
     esac
     #/usr/bin/xrandr --addmode eDP-1 1920x1080
-    /usr/bin/xrandr --output eDP-1 --auto 
+    /usr/bin/xrandr --output eDP-1 --auto
     /usr/bin/xrandr --output $DEV --auto --$pos eDP-1
   fi
   #/usr/bin/xset -dpms
@@ -90,5 +90,6 @@ fi
 /usr/bin/sudo -E -u jethros /home/jethros/.config/polybar/launch.sh
 /usr/bin/sudo -E -u jethros /home/jethros/.xmonad/bin/touchpad-setup.sh
 /usr/bin/setxkbmap -option 'ctrl:swapcaps'
+/usr/bin/setxkbmap -option 'altwin:swap_alt_win'
 
 # /usr/bin/systemctl restart systemd-logind
