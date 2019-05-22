@@ -41,31 +41,15 @@ fi
 # APPLICATION LAUNCHER
 #
 
-## tmux go!
-#$HOME/bin/tmuxgo &
-
-# emacs server
-
-# chromium
-#if [-z "$(pgrep chromium-browser)"]; then
-#  chromium-browser &
-#fi
-
-## deprecated because there is official slack now
-# slack
-#if [-z "$(pgrep scudcloud)"]; then
-#  scudcloud &
-#fi
-
 # keybase
 if [-z "$(pgrep run_keybase)"]; then
   run_keybase &
 fi
 
-# buzz
-#if [-z "$(pgrep buzz)"]; then
-	#buzz &
-#fi
+# guake
+if [-z "$(pgrep guake)"]; then
+  guake &
+fi
 
 
 # start flux
@@ -73,6 +57,15 @@ $HOME/.xmonad/bin/start-redshift
 
 ## dunst
 dunst -conf ~/.xmonad/dunst/dunstrc &
+
+# ssh keys
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<~/.ssh-agent-thing)"
+fi
+ssh-add ~/.ssh/jethrosun_rsa &
 
 # HACK: to fix the weird alacritty pacnic bug
 #fcitx &
@@ -111,4 +104,3 @@ xsetroot -cursor_name left_ptr &
 # Commented by default as it is assumed many users will not want this.
 #xinput set-button-map 10 1 0 3 4 5 6 7
 sudo -E -u jethros $HOME/.xmonad/bin/touchpad-setup.sh &
-
