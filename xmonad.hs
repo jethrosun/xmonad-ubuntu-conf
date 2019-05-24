@@ -415,6 +415,9 @@ myKeyBindings =
     --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
 
     , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
+    , ((myModMask, xK_d), spawn "rofi -show window")
+    , ((myModMask .|. shiftMask, xK_p), spawn "rofi -fuzzy -show ssh")
+
     , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
 
     -- Different browsers
