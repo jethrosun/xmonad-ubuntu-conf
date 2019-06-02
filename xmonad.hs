@@ -27,6 +27,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.Reflect
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -37,9 +38,6 @@ import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 
---import XMonad.Layout.MultiToggle
---import qualified XMonad.Layout.MultiToggle.Instances as Toggles
-import qualified XMonad.Layout.MultiToggle as MultiToggle
 import qualified XMonad.StackSet as W
 
 -- control floating window
@@ -61,10 +59,9 @@ myBorderWidth = 1 -- width of border around windows
 
 myTerminal = "alacritty"
 
---myTerminal           = "urxvtc"          -- gnome-terminal/terminator/urxvtc which terminal software to use
 myIMRosterTitle = "skype" -- title of roster on IM workspace
-                                         -- use "Buddy List" for Pidgin, but
-                                         -- "Contact List" for Empathy
+                          -- use "Buddy List" for Pidgin, but
+                          -- "Contact List" for Empathy
 
 {-
   Xmobar configuration variables. These settings control the appearance
@@ -127,50 +124,49 @@ startupWorkspace = "term" -- which workspace do you want to be on after launch?
   by hitting "super-b" (bound to ToggleStruts in the keyboard bindings
   in the next section). To change layout, "super-tab-space"
 -}
+
+
 -- Define group of default layouts used on most screens, in the
 -- order they will appear.
 -- "smartBorders" modifier makes it so the borders on windows only
 -- appear if there is more than one visible window.
 -- "avoidStruts" modifier makes it so that the layout provides
 -- space for the status bar at the top of the screen.
-defaultLayouts =
-  smartBorders
-    (avoidStruts
+defaultLayouts = smartBorders(avoidStruts(
   -- ResizableTall layout has a large master window on the left,
   -- and remaining windows tile on the right. By default each area
   -- takes up half the screen, but you can resize using "super-h" and
   -- "super-l".
-       (ResizableTall 1 (3 / 100) (1 / 2) []
+  ResizableTall 1 (3/100) (1/2) []
+
   -- Mirrored variation of ResizableTall. In this layout, the large
   -- master window is at the top, and remaining windows tile at the
   -- bottom of the screen. Can be resized as described above.
-         |||
-        Mirror (ResizableTall 1 (3 / 100) (1 / 2) [])
+  ||| Mirror (ResizableTall 1 (3/100) (1/2) [])
+
   -- Full layout makes every window full screen. When you toggle the
   -- active window, it will bring the active window to the front.
-         |||
-        noBorders Full
+  ||| noBorders Full
+
   -- ThreeColMid layout puts the large master window in the center
   -- of the screen. As configured below, by default it takes of 3/4 of
   -- the available space. Remaining windows tile to both the left and
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
-         |||
-        ThreeColMid 1 (4 / 100) (3 / 4)
-  -- BROKEN?
+  -- ||| ThreeColMid 1 (3/100) (3/4)
+
   -- Circle layout places the master window in the center of the screen.
   -- Remaining windows appear in a circle around it
   -- ||| Circle
+
   -- Grid layout tries to equally distribute windows in the available
   -- space, increasing the number of columns and rows as necessary.
   -- Master window is at top left.
-         |||
-        Grid))
+  ||| Grid))
 
 -- Here we define some layouts which will be assigned to specific
 -- workspaces based on the functionality of that workspace.
-docLayout =
-  smartBorders
+docLayout = smartBorders
     (avoidStruts (Full ||| ResizableTall 1 (3 / 100) (1 / 2) [] ||| Grid))
 
 -- Trying different imLayout ..
@@ -208,16 +204,14 @@ imLayout = smartBorders (avoidStruts (ThreeColMid 1 (3 / 100) (2 / 3))) --    ch
 -- can use single-window mode and avoid this issue.
 gimpLayout = smartBorders (avoidStruts (ThreeColMid 2 (3 / 100) (3 / 4)))
 
+termLayout = smartSpacing 10 $ smartBorders (avoidStruts (ResizableTall 1 (3/100) (1/2) []))
+
 --gimpLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
-myLayouts
-  -- onWorkspace "c" imLayout
-  -- $ onWorkspace "6:Pix" gimpLayout
- =
+myLayouts =
   onWorkspace "doc" docLayout $
-  MultiToggle.mkToggle (MultiToggle.single REFLECTX) $
-  MultiToggle.mkToggle (MultiToggle.single REFLECTY) $
+  onWorkspace "term" termLayout $
   onWorkspace "web" imLayout $ defaultLayouts
 
 {-
@@ -404,8 +398,6 @@ myKeyBindings =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_a), sendMessage MirrorShrink)
   , ((myModMask, xK_z), sendMessage MirrorExpand)
-  , ((myModMask .|. shiftMask, xK_x), sendMessage $ MultiToggle.Toggle REFLECTX)
-  , ((myModMask .|. shiftMask, xK_y), sendMessage $ MultiToggle.Toggle REFLECTY)
     -- IDE
   , ((myModMask .|. shiftMask, xK_i), spawn "/usr/bin/emacs-snapshot")
     --, ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
