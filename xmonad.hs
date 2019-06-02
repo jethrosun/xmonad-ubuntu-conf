@@ -34,7 +34,6 @@ import XMonad.Util.Run
 
 import qualified Data.Map as M
 import Data.Ratio ((%))
-import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 
@@ -173,40 +172,10 @@ docLayout = smartBorders
 --imLayout = smartBorders(avoidStruts(ThreeColMid ||| Full))
 imLayout = smartBorders (avoidStruts (ThreeColMid 1 (3 / 100) (2 / 3))) --    chatLayout      = Grid
 
--- The chat layout uses the "IM" layout. We have a roster which takes
--- up 1/8 of the screen vertically, and the remaining space contains
--- chat windows which are tiled using the grid layout. The roster is
--- identified using the myIMRosterTitle variable, and by default is
--- configured for Pidgin, so if you're using something else you
--- will want to modify that variable.
---myIMLayout = withIM (1%7) Corebird Grid
---chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
--- numMasters, resizeIncr, splitRatio
---tall = Tall 1           0.02        0.5
--- define the list of standardLayouts
---standardLayouts = tall ||| Mirror tall ||| Full
---imLayout = withIM (1/10) (Role "roster") standardLayouts
---https://wiki.haskell.org/Xmonad/Config_archive/sphynx%27s_xmonad.hs
---imLayout = avoidStruts $ reflectHoriz $
---  IM (1%6) (Or (And (ClassName "Nocturn") (Role ""))
---  (And (ClassName "Skype")  (And (Role "") (Not (Title "Options")))))
--- from https://wiki.haskell.org/Xmonad/Config_archive/Thomas_ten_Cate%27s_xmonad.hs
---imLayout = avoidStruts $ reflectHoriz $ withIM ratio rosters chatLayout where
---    ratio           = 1%6
---    [rosters]       = [skypeRoster, pidginRoster]
---    pidginRoster    = And (ClassName "Pidgin") (Role "buddy_list")
---    skypeRoster     = (ClassName "Skype") `And` (Not (Title "Options")) `And` (Not (Role "Chats")) `And` (Not (Role "CallWindowForm"))
--- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
--- floating panels approach is a bit of a challenge to handle with xmonad;
--- I find the best solution is to make the image you are working on the
--- master area, and then use this ThreeColMid layout to make the panels
--- tile to the left and right of the image. If you use GIMP 2.8, you
--- can use single-window mode and avoid this issue.
 gimpLayout = smartBorders (avoidStruts (ThreeColMid 2 (3 / 100) (3 / 4)))
 
 termLayout = smartSpacing 10 $ smartBorders (avoidStruts (ResizableTall 1 (3/100) (1/2) []))
 
---gimpLayout = smartBorders(avoidStruts(Full ||| ResizableTall 1 (3/100) (1/2) [] ||| Grid ))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
@@ -295,9 +264,6 @@ myManagementHooks =
   , (className =? "Terminator") --> doF (W.shift "a")
   , (className =? "Mendeley Desktop") --> doF (W.shift "b")
   , (className =? "terminus") --> doF (W.shift "a")
-  , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
-  , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
   , (className =? "XMind") --> doF (W.shift "a")
   , (className =? "Gimp-2.8") --> doF (W.shift "a")
   ]
@@ -310,7 +276,8 @@ myManagementHooks =
   Workspace navigation keybindings. This is probably the part of the
   configuration I have spent the most time messing with, but understand
   the least. Be very careful if messing with this section.
-    -}
+-}
+
 -- We define two lists of keycodes for use in the rest of the
 -- keyboard configuration. The first is the list of numpad keys,
 -- in the order they occur on the keyboard (left to right and
@@ -393,14 +360,13 @@ myKeys =
   command-line tool to determine the code for a specific key.
     Launch the command, then type the key in question and watch
   the output.
-    -}
+-}
 myKeyBindings =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_a), sendMessage MirrorShrink)
   , ((myModMask, xK_z), sendMessage MirrorExpand)
     -- IDE
   , ((myModMask .|. shiftMask, xK_i), spawn "/usr/bin/emacs-snapshot")
-    --, ((myModMask, xK_o), spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
   , ( (myModMask .|. shiftMask, xK_o)
     , spawn
         "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
@@ -412,9 +378,7 @@ myKeyBindings =
     -- Different browsers
   , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
   , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
-    --, ((myModMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
-  , ( (myModMask .|. shiftMask, xK_f)
-    , spawn "$HOME/.local/share/umake/bin/firefox-developer")
+  , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
   , ((myModMask, xK_f), spawn "caja .")
   , ((myModMask, xK_c), spawn "caja")
   , ((myModMask .|. shiftMask, xK_c), spawn "caja")
@@ -443,13 +407,9 @@ myThinkpadKeys =
         --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
         --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Headphone unmute &")
   , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle &")
-  , ( "<XF86Display>"
-    , spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
-          -- FIXME:
-  , ( "<XF86MonBrightnessUp>"
-    , spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
-  , ( "<XF86MonBrightnessDown>"
-    , spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")
+  , ("<XF86Display>", spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
+  , ("<XF86MonBrightnessUp>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
+  , ("<XF86MonBrightnessDown>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")
   , ("M-\\", toggleTouchpad)
   ]
 
@@ -463,10 +423,9 @@ toggleTouchpad =
   Here we actually stitch together all the configuration settings
   and run xmonad. We also spawn an instance of xmobar and pipe
   content into it via the logHook.
-    -}
-main
-  --xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
- = do
+-}
+main =
+  do
   xmonad $
     docks $
     ewmh $
