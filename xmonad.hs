@@ -267,6 +267,7 @@ myManagementHooks =
   , (className =? "terminus") --> doF (W.shift "a")
   , (className =? "XMind") --> doF (W.shift "a")
   , (className =? "Gimp-2.8") --> doF (W.shift "a")
+  , (className =? "Liferea") --> doF (W.shift "c")
   ]
   where
     classNotRole :: (String, String) -> Query Bool
