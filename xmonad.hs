@@ -31,17 +31,13 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
-
 import qualified Data.Map as M
 import Data.Ratio ((%))
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
-
 import qualified XMonad.StackSet as W
-
 -- control floating window
 import XMonad.Hooks.Place
-
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 
 {-
@@ -107,7 +103,7 @@ myUrgentWSRight = "}"
   as well.
 -}
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
-myWorkspaces = ["term", "web", "code", "doc", "mx", "sfx", "a", "b", "c"]
+myWorkspaces = ["term","web","code","doc","mx","sfx","a","b","c"]
 
 startupWorkspace = "term" -- which workspace do you want to be on after launch?
 
@@ -123,50 +119,46 @@ startupWorkspace = "term" -- which workspace do you want to be on after launch?
   by hitting "super-b" (bound to ToggleStruts in the keyboard bindings
   in the next section). To change layout, "super-tab-space"
 -}
-
-
 -- Define group of default layouts used on most screens, in the
 -- order they will appear.
 -- "smartBorders" modifier makes it so the borders on windows only
 -- appear if there is more than one visible window.
 -- "avoidStruts" modifier makes it so that the layout provides
 -- space for the status bar at the top of the screen.
-defaultLayouts = smartBorders(avoidStruts(
-  -- ResizableTall layout has a large master window on the left,
-  -- and remaining windows tile on the right. By default each area
-  -- takes up half the screen, but you can resize using "super-h" and
-  -- "super-l".
-  ResizableTall 1 (3/100) (1/2) []
-
-  -- Mirrored variation of ResizableTall. In this layout, the large
-  -- master window is at the top, and remaining windows tile at the
-  -- bottom of the screen. Can be resized as described above.
-  ||| Mirror (ResizableTall 1 (3/100) (1/2) [])
-
-  -- Full layout makes every window full screen. When you toggle the
-  -- active window, it will bring the active window to the front.
-  ||| noBorders Full
-
-  -- ThreeColMid layout puts the large master window in the center
-  -- of the screen. As configured below, by default it takes of 3/4 of
-  -- the available space. Remaining windows tile to both the left and
-  -- right of the master window. You can resize using "super-h" and
-  -- "super-l".
-  -- ||| ThreeColMid 1 (3/100) (3/4)
-
-  -- Circle layout places the master window in the center of the screen.
-  -- Remaining windows appear in a circle around it
-  -- ||| Circle
-
-  -- Grid layout tries to equally distribute windows in the available
-  -- space, increasing the number of columns and rows as necessary.
-  -- Master window is at top left.
-  ||| Grid))
+defaultLayouts =
+  smartBorders (avoidStruts (
+                             -- ResizableTall layout has a large master window on the left,
+                             -- and remaining windows tile on the right. By default each area
+                             -- takes up half the screen, but you can resize using "super-h" and
+                             -- "super-l".
+                             ResizableTall 1 (3 / 100) (1 / 2) []
+                             -- Mirrored variation of ResizableTall. In this layout, the large
+                             -- master window is at the top, and remaining windows tile at the
+                             -- bottom of the screen. Can be resized as described above.
+                             ||| Mirror (ResizableTall 1 (3 / 100) (1 / 2) [])
+                             -- Full layout makes every window full screen. When you toggle the
+                             -- active window, it will bring the active window to the front.
+                             ||| noBorders Full
+                             -- ThreeColMid layout puts the large master window in the center
+                             -- of the screen. As configured below, by default it takes of 3/4 of
+                             -- the available space. Remaining windows tile to both the left and
+                             -- right of the master window. You can resize using "super-h" and
+                             -- "super-l".
+                             -- ||| ThreeColMid 1 (3/100) (3/4)
+                             -- Circle layout places the master window in the center of the screen.
+                             -- Remaining windows appear in a circle around it
+                             -- ||| Circle
+                             -- Grid layout tries to equally distribute windows in the available
+                             -- space, increasing the number of columns and rows as necessary.
+                             -- Master window is at top left.
+                             ||| Grid))
 
 -- Here we define some layouts which will be assigned to specific
 -- workspaces based on the functionality of that workspace.
-docLayout = smartBorders
-    (avoidStruts (Full ||| ResizableTall 1 (3 / 100) (1 / 2) [] ||| Grid))
+docLayout =
+  smartBorders (avoidStruts (Full
+                             ||| ResizableTall 1 (3 / 100) (1 / 2) []
+                             ||| Grid))
 
 -- Trying different imLayout ..
 --imLayout = smartBorders(avoidStruts(ThreeColMid ||| Full))
@@ -174,14 +166,17 @@ imLayout = smartBorders (avoidStruts (ThreeColMid 1 (3 / 100) (2 / 3))) --    ch
 
 gimpLayout = smartBorders (avoidStruts (ThreeColMid 2 (3 / 100) (3 / 4)))
 
-termLayout = smartSpacing 30 $ smartBorders (avoidStruts (ResizableTall 1 (3/100) (1/2) []))
+termLayout =
+  smartSpacing 30
+  $ smartBorders (avoidStruts (ResizableTall 1 (3 / 100) (1 / 2) []))
 
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "doc" docLayout $
-  onWorkspace "term" termLayout $
-  onWorkspace "web" imLayout $ defaultLayouts
+  onWorkspace "doc" docLayout
+  $ onWorkspace "term" termLayout
+  $ onWorkspace "web" imLayout
+  $ defaultLayouts
 
 {-
   Management hooks. You can use management hooks to enforce certain
@@ -228,58 +223,56 @@ myLayouts =
         -}
 myManagementHooks :: [ManageHook]
 myManagementHooks =
-  [ resource =? "synapse" --> doIgnore
-  , resource =? "stalonetray" --> doIgnore
-  , className =? "mpv" --> doFloat <+> doF (W.shift "term")
-  , (className =? "TexMaker") --> doF (W.shift "code")
-  , (className =? "Code") --> doF (W.shift "code")
-  , (className =? "Emacs-snapshot") --> doF (W.shift "code")
-  , (className =? "Emacs") --> doF (W.shift "code")
-  , (className =? "jetbrains-pycharm") --> doF (W.shift "code")
-  , (className =? "jetbrains-idea") --> doF (W.shift "code")
-  , (className =? "Zathura") --> doF (W.shift "doc")
-  , (className =? "Master PDF Editor") --> doF (W.shift "doc")
-  , (className =? "Evince") --> doF (W.shift "doc")
-  , (className =? "Meld") --> doF (W.shift "mx")
-  , (className =? "Mailspring") --> doF (W.shift "b")
-  , (className =? "Virt-manager") --> doF (W.shift "b")
-  , (className =? "heaptrack_gui") --> doF (W.shift "b")
-  , (className =? "VirtualBox") --> doF (W.shift "b")
-  , (className =? "Wireshark") --> doF (W.shift "b")
-  , (className =? "qutebrowser") --> doF (W.shift "web")
-  , (className =? "Firefox") --> doF (W.shift "web")
-  , (className =? "Firefox Developer Edition") --> doF (W.shift "web")
-  , (className =? "vlc") --> doF (W.shift "a")
-  , (className =? "Skype") --> doF (W.shift "b")
-  , (className =? "Nocturn") --> doF (W.shift "a")
-  , (className =? "Slack") --> doF (W.shift "b")
-  , (className =? "desktop") --> doF (W.shift "a") -- reMarkable
-  , (className =? "Corebird") --> doF (W.shift "a")
-  , (className =? "Empathy") --> doF (W.shift "a")
-  , (className =? "Pidgin") --> doF (W.shift "a")
-  , (className =? "ScudCloud Slack") --> doF (W.shift "a")
-    -- and float everything but the roster
-    --, classNotRole ("Nocturn", "roster") --> doFloat
-  , (className =? "Chromium-browser") --> doF (W.shift "web")
-  , (className =? "Google-chrome") --> doF (W.shift "a")
-  , (className =? "Terminator") --> doF (W.shift "a")
-  , (className =? "Mendeley Desktop") --> doF (W.shift "b")
-  , (className =? "terminus") --> doF (W.shift "a")
-  , (className =? "XMind") --> doF (W.shift "a")
-  , (className =? "Gimp-2.8") --> doF (W.shift "a")
-  , (className =? "Liferea") --> doF (W.shift "c")
-  ]
-  where
-    classNotRole :: (String, String) -> Query Bool
-    classNotRole (c, r) = className =? c <&&> role /=? r
-    role = stringProperty "WM_WINDOW_ROLE"
+  [resource =? "synapse" --> doIgnore
+  ,resource =? "stalonetray" --> doIgnore
+  ,className =? "mpv" --> doFloat <+> doF (W.shift "term")
+  ,(className =? "TexMaker") --> doF (W.shift "code")
+  ,(className =? "Code") --> doF (W.shift "code")
+  ,(className =? "Emacs-snapshot") --> doF (W.shift "code")
+  ,(className =? "Emacs") --> doF (W.shift "code")
+  ,(className =? "jetbrains-pycharm") --> doF (W.shift "code")
+  ,(className =? "jetbrains-idea") --> doF (W.shift "code")
+  ,(className =? "Zathura") --> doF (W.shift "doc")
+  ,(className =? "Master PDF Editor") --> doF (W.shift "doc")
+  ,(className =? "Evince") --> doF (W.shift "doc")
+  ,(className =? "Meld") --> doF (W.shift "mx")
+  ,(className =? "Mailspring") --> doF (W.shift "b")
+  ,(className =? "Virt-manager") --> doF (W.shift "b")
+  ,(className =? "heaptrack_gui") --> doF (W.shift "b")
+  ,(className =? "VirtualBox") --> doF (W.shift "b")
+  ,(className =? "Wireshark") --> doF (W.shift "b")
+  ,(className =? "qutebrowser") --> doF (W.shift "web")
+  ,(className =? "Firefox") --> doF (W.shift "web")
+  ,(className =? "Firefox Developer Edition") --> doF (W.shift "web")
+  ,(className =? "vlc") --> doF (W.shift "a")
+  ,(className =? "Skype") --> doF (W.shift "b")
+  ,(className =? "Nocturn") --> doF (W.shift "a")
+  ,(className =? "Slack") --> doF (W.shift "b")
+  ,(className =? "desktop") --> doF (W.shift "a") -- reMarkable
+  ,(className =? "Corebird") --> doF (W.shift "a")
+  ,(className =? "Empathy") --> doF (W.shift "a")
+  ,(className =? "Pidgin") --> doF (W.shift "a")
+  ,(className =? "ScudCloud Slack") --> doF (W.shift "a")
+   -- and float everything but the roster
+   --, classNotRole ("Nocturn", "roster") --> doFloat
+  ,(className =? "Chromium-browser") --> doF (W.shift "web")
+  ,(className =? "Google-chrome") --> doF (W.shift "a")
+  ,(className =? "Terminator") --> doF (W.shift "a")
+  ,(className =? "Mendeley Desktop") --> doF (W.shift "b")
+  ,(className =? "terminus") --> doF (W.shift "a")
+  ,(className =? "XMind") --> doF (W.shift "a")
+  ,(className =? "Gimp-2.8") --> doF (W.shift "a")
+  ,(className =? "Liferea") --> doF (W.shift "c")]
+  where classNotRole :: (String,String) -> Query Bool
+        classNotRole (c,r) = className =? c <&&> role /=? r
+
+        role = stringProperty "WM_WINDOW_ROLE"
 
 {-
   Workspace navigation keybindings. This is probably the part of the
   configuration I have spent the most time messing with, but understand
   the least. Be very careful if messing with this section.
 -}
-
 -- We define two lists of keycodes for use in the rest of the
 -- keyboard configuration. The first is the list of numpad keys,
 -- in the order they occur on the keyboard (left to right and
@@ -290,34 +283,20 @@ myManagementHooks =
 -- use them to figure out where to go when the user
 -- uses the arrow keys.
 numPadKeys =
-  [ xK_KP_Home
-  , xK_KP_Up
-  , xK_KP_Page_Up
-  , xK_KP_Left
-  , xK_KP_Begin
-  , xK_KP_Right
-  , xK_KP_End
-  , xK_KP_Down
-  , xK_KP_Page_Down
-  , xK_KP_Insert
-  , xK_KP_Delete
-  , xK_KP_Enter
-  ]
+  [xK_KP_Home
+  ,xK_KP_Up
+  ,xK_KP_Page_Up
+  ,xK_KP_Left
+  ,xK_KP_Begin
+  ,xK_KP_Right
+  ,xK_KP_End
+  ,xK_KP_Down
+  ,xK_KP_Page_Down
+  ,xK_KP_Insert
+  ,xK_KP_Delete
+  ,xK_KP_Enter]
 
-numKeys =
-  [ xK_7
-  , xK_8
-  , xK_9
-  , xK_4
-  , xK_5
-  , xK_6
-  , xK_1
-  , xK_2
-  , xK_3
-  , xK_0
-  , xK_minus
-  , xK_equal
-  ]
+numKeys = [xK_7,xK_8,xK_9,xK_4,xK_5,xK_6,xK_1,xK_2,xK_3,xK_0,xK_minus,xK_equal]
 
 -- Here, some magic occurs that I once grokked but has since
 -- fallen out of my head. Essentially what is happening is
@@ -325,20 +304,18 @@ numKeys =
 -- how to send windows to different workspaces,
 -- and what keys to use to change which monitor is focused.
 myKeys =
-  myKeyBindings ++
-  [ ((m .|. myModMask, k), windows $ f i)
-  | (i, k) <- zip myWorkspaces numPadKeys
-  , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-  ] ++
-  [ ((m .|. myModMask, k), windows $ f i)
-  | (i, k) <- zip myWorkspaces numKeys
-  , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
-  ] ++
-  M.toList (planeKeys myModMask (Lines 4) Finite) ++
-  [ ((m .|. myModMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  | (key, sc) <- zip [xK_w, xK_e, xK_r] [1, 0, 2]
-  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-  ]
+  myKeyBindings
+  ++ [((m .|. myModMask,k),windows $ f i)
+     | (i,k) <- zip myWorkspaces numPadKeys
+      ,(f,m) <- [(W.greedyView,0),(W.shift,shiftMask)]]
+  ++ [((m .|. myModMask,k),windows $ f i)
+     | (i,k) <- zip myWorkspaces numKeys
+      ,(f,m) <- [(W.greedyView,0),(W.shift,shiftMask)]]
+  ++ M.toList (planeKeys myModMask (Lines 4) Finite)
+  ++ [((m .|. myModMask,key)
+      ,screenWorkspace sc >>= flip whenJust (windows . f))
+     | (key,sc) <- zip [xK_w,xK_e,xK_r] [1,0,2]
+      ,(f,m) <- [(W.view,0),(W.shift,shiftMask)]]
 
 {-
   Custom keybindings. In this section we define a list of relatively
@@ -364,62 +341,61 @@ myKeys =
   the output.
 -}
 myKeyBindings =
-  [ ((myModMask, xK_b), sendMessage ToggleStruts)
-  , ((myModMask, xK_a), sendMessage MirrorShrink)
-  , ((myModMask, xK_z), sendMessage MirrorExpand)
-    -- IDE
-  , ((myModMask .|. shiftMask, xK_i), spawn "/usr/bin/emacs-snapshot")
-  , ( (myModMask .|. shiftMask, xK_o)
-    , spawn
-        "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
-    --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
-  , ((myModMask, xK_p), spawn "rofi -show run") -- no more synapse
-  , ((myModMask, xK_d), spawn "rofi -show window")
-  , ((myModMask .|. shiftMask, xK_p), spawn "rofi -fuzzy -show ssh")
-  , ((myModMask .|. shiftMask, xK_t), spawn "terminator")
-    -- Different browsers
-  , ((myModMask .|. shiftMask, xK_g), spawn "google-chrome")
-  , ((myModMask .|. shiftMask, xK_m), spawn "chromium-browser")
-  , ((myModMask .|. shiftMask, xK_f), spawn "$HOME/.local/share/umake/bin/firefox-developer")
-  , ((myModMask, xK_f), spawn "caja .")
-  , ((myModMask, xK_c), spawn "caja")
-  , ((myModMask .|. shiftMask, xK_c), spawn "caja")
-    --, ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
-  , ((myModMask .|. shiftMask, xK_l), spawn "slock") -- new screenlock
-  , ((myModMask, xK_s), spawn "gnome-screenshot") -- screenshot
-  , ((0, xK_Print), spawn "gnome-screenshot") -- screenshot
-    -- it is broken for some unknow reason
-  , ((myModMask .|. shiftMask, xK_s), spawn "gnome-screenshot -a") -- interactive screenshot
-    --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
-    --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
-  , ((myModMask, xK_u), focusUrgent)
-  , ( (myModMask, xK_F1)
-    , spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh mirror &")
-  , ((myModMask, xK_F9), spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
-  , ((myModMask, xK_F10), spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
-  ] --where
-    --fullFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery doFullFloat f
-    --rectFloatFocused = withFocused $ \f -> windows =<< appEndo `fmap` runQuery (doRectFloat $ W.RationalRect 0.05 0.05 0.9 0.9) f
+  [((myModMask,xK_b),sendMessage ToggleStruts)
+  ,((myModMask,xK_a),sendMessage MirrorShrink)
+  ,((myModMask,xK_z),sendMessage MirrorExpand)
+   -- IDE
+  ,((myModMask .|. shiftMask,xK_i),spawn "/usr/bin/emacs-snapshot")
+  ,((myModMask .|. shiftMask,xK_o)
+     ,spawn "$HOME/.local/bin/emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs.pdmp &")
+   --, ((myModMask, xK_e), spawn "emacs-snapshot")  -- broken
+  ,((myModMask,xK_p),spawn "rofi -show run") -- no more synapse
+  ,((myModMask,xK_d),spawn "rofi -show window")
+  ,((myModMask .|. shiftMask,xK_p),spawn "rofi -fuzzy -show ssh")
+  ,((myModMask .|. shiftMask,xK_t),spawn "terminator")
+   -- Different browsers
+  ,((myModMask .|. shiftMask,xK_g),spawn "google-chrome")
+  ,((myModMask .|. shiftMask,xK_m),spawn "chromium-browser")
+  ,((myModMask .|. shiftMask,xK_f)
+     ,spawn "$HOME/.local/share/umake/bin/firefox-developer")
+  ,((myModMask,xK_f),spawn "caja .")
+  ,((myModMask,xK_c),spawn "caja")
+  ,((myModMask .|. shiftMask,xK_c),spawn "caja")
+   --, ((myModMask .|. shiftMask, xK_l), spawn "gnome-screensaver-command --lock")  -- screenlock
+  ,((myModMask .|. shiftMask,xK_l),spawn "slock") -- new screenlock
+  ,((myModMask,xK_s),spawn "gnome-screenshot") -- screenshot
+  ,((0,xK_Print),spawn "gnome-screenshot") -- screenshot
+   -- it is broken for some unknow reason
+  ,((myModMask .|. shiftMask,xK_s),spawn "gnome-screenshot -a") -- interactive screenshot
+   --, ((myModMask .|. shiftMask, xK_t), rectFloatFocused)   --Push window into float
+   --, ((myModMask .|. shiftMask, xK_f), fullFloatFocused)   --Push window into full screen
+  ,((myModMask,xK_u),focusUrgent)
+  ,((myModMask,xK_F1)
+     ,spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh mirror &")
+  ,((myModMask,xK_F9),spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+  ,((myModMask,xK_F10),spawn "$HOME/.xmonad/bin/voldzen.sh - -d")]
 
-myThinkpadKeys :: [(String, X ())]
+myThinkpadKeys :: [(String,X ())]
 myThinkpadKeys =
-  [ ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
-        --, ("M-<XF86AudioLowerVolume>", spawn "amixer set Master 3dB-")
-  , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
-        --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
-        --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Headphone unmute &")
-  , ("<XF86AudioMute>", spawn "amixer -q -D pulse sset Master toggle &")
-  , ("<XF86Display>", spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
-  , ("<XF86MonBrightnessUp>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
-  , ("<XF86MonBrightnessDown>", spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")
-  , ("M-\\", toggleTouchpad)
-  ]
+  [("<XF86AudioLowerVolume>",spawn "$HOME/.xmonad/bin/voldzen.sh - -d")
+       --, ("M-<XF86AudioLowerVolume>", spawn "amixer set Master 3dB-")
+  ,("<XF86AudioRaiseVolume>",spawn "$HOME/.xmonad/bin/voldzen.sh + -d")
+       --, ("M-<XF86AudioRaiseVolume>", spawn "amixer set Master 3dB+")
+       --, ("<XF86AudioMute>", spawn "amixer set Master toggle; amixer set Headphone unmute &")
+  ,("<XF86AudioMute>",spawn "amixer -q -D pulse sset Master toggle &")
+  ,("<XF86Display>"
+     ,spawn "sudo -E -u jethros $HOME/.xmonad/bin/hotplug-dp.sh &")
+  ,("<XF86MonBrightnessUp>"
+     ,spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh + &")
+  ,("<XF86MonBrightnessDown>"
+     ,spawn "sudo $HOME/.xmonad/bin/adjust_brightness.sh - &")
+  ,("M-\\",toggleTouchpad)]
 
 toggleTouchpad =
   let touchpad = "'SynPS/2 Synaptics TouchPad'"
       newStatus = "$(xinput --list " ++ touchpad ++ " | grep -c disabled)"
-  in spawn $
-     "xinput --set-prop " ++ touchpad ++ " 'Device Enabled' " ++ newStatus
+  in spawn
+     $ "xinput --set-prop " ++ touchpad ++ " 'Device Enabled' " ++ newStatus
 
 {-
   Here we actually stitch together all the configuration settings
@@ -427,30 +403,26 @@ toggleTouchpad =
   content into it via the logHook.
 -}
 main =
-  do
-  xmonad $
-    docks $
-    ewmh $
-    pagerHints $
-    withUrgencyHook NoUrgencyHook $
-    defaultConfig
-    { focusedBorderColor = myFocusedBorderColor
-    , normalBorderColor = myNormalBorderColor
-    , terminal = myTerminal
-    , borderWidth = myBorderWidth
-    , layoutHook = myLayouts
-    , workspaces = myWorkspaces
-    , modMask = myModMask
-    , handleEventHook = fullscreenEventHook
-    , startupHook =
-        do setWMName "LG3D"
-           windows $ W.greedyView startupWorkspace
-           spawn "~/.xmonad/startup-hook"
-    , manageHook =
-        manageHook defaultConfig
-      -- <+> placeHook (withGaps (16,0,16,0) (smart (1,0.98))) -- save some space for polybar
-         <+>
-        composeAll myManagementHooks <+> manageDocks
-    } `additionalKeys`
-    myKeys `additionalKeysP`
-    myThinkpadKeys
+  do xmonad
+       $ docks
+       $ ewmh
+       $ pagerHints
+       $ withUrgencyHook NoUrgencyHook
+       $ defaultConfig {focusedBorderColor = myFocusedBorderColor
+                       ,normalBorderColor = myNormalBorderColor
+                       ,terminal = myTerminal
+                       ,borderWidth = myBorderWidth
+                       ,layoutHook = myLayouts
+                       ,workspaces = myWorkspaces
+                       ,modMask = myModMask
+                       ,handleEventHook = fullscreenEventHook
+                       ,startupHook =
+                          do setWMName "LG3D"
+                             windows $ W.greedyView startupWorkspace
+                             spawn "~/.xmonad/startup-hook"
+                       ,manageHook = manageHook defaultConfig
+                          -- <+> placeHook (withGaps (16,0,16,0) (smart (1,0.98))) -- save some space for polybar
+                          <+> composeAll myManagementHooks
+                          <+> manageDocks}
+       `additionalKeys` myKeys
+       `additionalKeysP` myThinkpadKeys
