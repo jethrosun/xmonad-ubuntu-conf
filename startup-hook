@@ -51,6 +51,10 @@ if [-z "$(pgrep guake)"]; then
   guake &
 fi
 
+# conky
+if [-z "$(pgrep conky)"]; then
+  conky -c ~/.conkyrc &
+fi
 
 # start flux
 $HOME/.xmonad/bin/start-redshift
