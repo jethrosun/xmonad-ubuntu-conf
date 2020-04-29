@@ -64,7 +64,7 @@ myIMRosterTitle = "skype" -- title of roster on IM workspace
 -}
 myTitleColor = "#eeeeee" -- color of window title
 
-myTitleLength = 80 -- truncate window title to this length
+myTitleLength = 90 -- truncate window title to this length
 
 myCurrentWSColor = "#e6744c" -- color of active workspace
 
@@ -237,7 +237,7 @@ myManagementHooks =
   ,(className =? "Master PDF Editor") --> doF (W.shift "doc")
   ,(className =? "Evince") --> doF (W.shift "doc")
   ,(className =? "Meld") --> doF (W.shift "mx")
-  ,(className =? "Zotero") --> doF (W.shift "sfx")
+  ,(className =? "Zotero") --> doF (W.shift "c")
   ,(className =? "Mailspring") --> doF (W.shift "b")
   ,(className =? "Virt-manager") --> doF (W.shift "b")
   ,(className =? "heaptrack_gui") --> doF (W.shift "b")
