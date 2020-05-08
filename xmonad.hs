@@ -167,7 +167,7 @@ imLayout = smartBorders (avoidStruts (ThreeColMid 1 (3 / 100) (2 / 3))) --    ch
 gimpLayout = smartBorders (avoidStruts (ThreeColMid 2 (3 / 100) (3 / 4)))
 
 termLayout =
-  smartSpacing 30
+  smartSpacing 10
   $ smartBorders (avoidStruts (ResizableTall 1 (3 / 100) (1 / 2) []))
 
 -- Here we combine our default layouts with our specific, workspace-locked
