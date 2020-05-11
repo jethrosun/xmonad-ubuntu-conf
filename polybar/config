@@ -37,7 +37,7 @@ font-8 = "Noto Sans Symbols2:size=11;1"
 
 modules-left = date ewmh xwindow
 modules-center =
-modules-right = wlan pulseaudio filesystem cpu battery
+modules-right = wlan pulseaudio filesystem cpu battery tray
 
 tray-position = right
 tray-padding = 2

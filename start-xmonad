@@ -21,20 +21,20 @@ xrdb -merge .Xresources
 # if you prefer not to use any transparency, but it is likely to cause
 # ugly black fringing with some programs such as synapse that expect
 # transparency support.
-xcompmgr -n &
+# xcompmgr -n &
 
 # Here I run some personal little things
 #
 # Crusial here because only this can make it happen
 # -----------------------
-guake &
+# guake &
 
-ssh-add ~/.ssh/cloud.pem &
-ssh-add ~/.ssh/jsun7 &
-ssh-add ~/.ssh/id_rsa &
+# ssh-add ~/.ssh/cloud.pem &
+# ssh-add ~/.ssh/jsun7 &
+# ssh-add ~/.ssh/id_rsa &
 
-($HOME/.dropbox-dist/dropboxd &) &
-urxvtd &
+# ($HOME/.dropbox-dist/dropboxd &) &
+# urxvtd &
 
 # TLP
 # https://wiki.archlinux.org/index.php/TLP
@@ -85,7 +85,6 @@ nitrogen --restore &
 # This works
 #feh --bg-fill ~/Dropbox/wallpapers/bg.jpg   &
 
-
 #
 # STARTUP ICON TRAY
 #
@@ -110,16 +109,16 @@ nitrogen --restore &
 # - window-strut "none" means windows are allowed to cover the tray. In
 #   other words, trust xmonad to handle this part.
 #
-stalonetray \
- --icon-gravity E \
- --geometry 5x1-0+0 \
- --max-geometry 5x1-0+0 \
- --background '#000000' \
- --skip-taskbar \
- --icon-size 24 \
- --kludges force_icons_size \
- --window-strut none \
-&
+# stalonetray \
+#  --icon-gravity E \
+#  --geometry 5x1-0+0 \
+#  --max-geometry 5x1-0+0 \
+#  --background '#000000' \
+#  --skip-taskbar \
+#  --icon-size 24 \
+#  --kludges force_icons_size \
+#  --window-strut none \
+# &
 
 # better start taffybar after the tray
 #taffybar &
@@ -135,9 +134,6 @@ gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 setxkbmap -option 'ctrl:swapcaps'
 setxkbmap -option 'altwin:swap_alt_win'
 
-## Slack no more!
-#slack &
-nocturn &
 #chromium-browser &
 xsetroot -cursor_name left_ptr &
 
