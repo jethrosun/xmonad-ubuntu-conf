@@ -238,6 +238,7 @@ myManagementHooks =
   ,(className =? "Evince") --> doF (W.shift "doc")
   ,(className =? "Meld") --> doF (W.shift "mx")
   ,(className =? "Zotero") --> doF (W.shift "c")
+  ,(className =? "Evolution") --> doF (W.shift "c")
   ,(className =? "Mailspring") --> doF (W.shift "b")
   ,(className =? "Virt-manager") --> doF (W.shift "b")
   ,(className =? "heaptrack_gui") --> doF (W.shift "b")

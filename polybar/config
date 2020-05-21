@@ -40,8 +40,8 @@ modules-center =
 modules-right = wlan pulseaudio filesystem cpu battery tray
 
 tray-position = right
-tray-padding = 2
-tray-maxsize = 24
+tray-padding = 1
+tray-maxsize = 16
 
 [global/wm]
 margin-top = 0
@@ -137,8 +137,8 @@ format-connected-underline = #9f78e1
 format-connected-prefix = " "
 format-connected-prefix-foreground = #666
 format-connected-prefix-offset = -6
-; label-connected = %downspeed:8%
-label-connected = %essid% %downspeed:7%
+label-connected = %downspeed:8%
+; label-connected = %essid% %downspeed:7%
 
 format-disconnected = <label-disconnected>
 format-disconnected-prefix = " "
@@ -186,7 +186,7 @@ label = %date% %time%
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
+full-at = 96
 
 format-charging = <label-charging>
 format-charging-underline = #ffb52a
